@@ -1,4 +1,4 @@
-package cubes.test;
+package cubes.tests;
 
 import static org.junit.Assert.*;
 
