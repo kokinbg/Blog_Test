@@ -15,8 +15,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
-
 public class AddNewPostWebPage {
 
 	// Fields
@@ -74,7 +72,7 @@ public class AddNewPostWebPage {
 	}
 
 	// Klikni na TAG Checkbox
-	public void pickTAG (String checkboxLabel) {
+	public void pickTAG(String checkboxLabel) {
 		WebElement label = driver.findElement(By.xpath("//label[contains(text(), '" + checkboxLabel + "')]"));
 		label.click();
 	}
@@ -86,7 +84,7 @@ public class AddNewPostWebPage {
 
 	// Unost teksta u 'Content' polje (iFrame)
 	public void inputContent(String iFrameLocator, String contentLocator, String contentText) {
-		
+
 		// Nalazim iFrame
 		WebElement iFrame_WebELement = driver.findElement(By.xpath(iFrameLocator));
 
@@ -103,15 +101,16 @@ public class AddNewPostWebPage {
 		// Vracam fokus na glavni sadrzaj
 		driver.switchTo().defaultContent();
 	}
-	
+
 	// Unost teksta u 'Content' polje (iFrame) - (drugi nacin)
-	public void insertContent (String content) {
+	public void insertContent(String content) {
 		driver.switchTo().frame(0);
-		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", driver.findElement(By.tagName("p")));
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);",
+				driver.findElement(By.tagName("p")));
 		driver.findElement(By.tagName("p")).clear();
 		driver.findElement(By.tagName("p")).sendKeys(content);
 		driver.switchTo().defaultContent();
-		
+
 	}
 
 	// klik na Save button
@@ -168,7 +167,6 @@ public class AddNewPostWebPage {
 		String titleText = loadTextFromFile(titleFilePath);
 		inputTitleWebElement.sendKeys(titleText);
 	}
-	
 
 	// ERROR PORUKE
 
@@ -207,26 +205,26 @@ public class AddNewPostWebPage {
 		WebElement lessThan20CharError = driver.findElement(By.id("title-error"));
 		return lessThan20CharError.getText().equalsIgnoreCase(lessThan20Error);
 	}
-	
+
 	// U 'Title' polje, uneto vise od 255 karaktera, error poruka
-	public boolean titleMoreThan255CharErrorMessage (String moreThan255Error) {
-		WebElement moreThan255CharError = driver.findElement(By.xpath("//span[contains(text(), 'Please enter no more than 255 characters.')]"));
+	public boolean titleMoreThan255CharErrorMessage(String moreThan255Error) {
+		WebElement moreThan255CharError = driver
+				.findElement(By.xpath("//span[contains(text(), 'Please enter no more than 255 characters.')]"));
 		return moreThan255CharError.getText().equalsIgnoreCase(moreThan255Error);
 	}
-	
+
 	// U 'Description' uneto vise od 500 karaktera, error poruka
-	public boolean descriptionMoreThan500CharErrorMessage (String moreThan500Char) {
+	public boolean descriptionMoreThan500CharErrorMessage(String moreThan500Char) {
 		WebElement moreThan500CharError = driver.findElement(By.id("description-error"));
 		return moreThan500CharError.getText().equalsIgnoreCase(moreThan500Char);
 	}
-	
+
 	// Invalid Photo Format, error poruka
-	public boolean invalidPhotoFormatError (String invalidPhotoFormat) {
+	public boolean invalidPhotoFormatError(String invalidPhotoFormat) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		WebElement invalidPhotoFormatErrorField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'The photo must be an image.')]")));
+		WebElement invalidPhotoFormatErrorField = wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//div[contains(text(), 'The photo must be an image.')]")));
 		return invalidPhotoFormatErrorField.getText().equalsIgnoreCase(invalidPhotoFormat);
 	}
-	
-	
 
 }

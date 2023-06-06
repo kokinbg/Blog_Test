@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
 
 import cubes.helper.MyWebDriver;
@@ -21,51 +22,8 @@ import cubes.pages.posts.PostListWebPage;
 
 public class AddNewPostTest {
 
-	// FIELDS
-
 	// Driver
 	private static WebDriver driver;
-
-	// Web Elementi
-
-	// 'Content Field' WebElements (with iFrame)
-	private String contentLabel = "//label[text()='Content']";
-	private String iFrameLocator = "//iframe[@class='cke_wysiwyg_frame cke_reset']";
-	private String contentFieldLocator = "//body[@class='cke_editable cke_editable_themed cke_contents_ltr cke_show_borders']";
-
-	// 'Cancel' dugme, xPath
-	private String cancelButton = "//a[@class='btn btn-outline-secondary']";
-	// 'Save' dugme, xPath
-	private String saveButton = "//button[@type='submit']";
-
-	// 'Category' Name
-	private String categoryName = "Vladimir QA";
-
-	// 'TAG' Names
-	private String tagOne = "VladimirQA_NE_BRISI!";
-	private String tagTwo = "VladimirQA2_NE_BRISI!";
-	private String tagThree = "Default TAG NE BRISATI";
-
-	// Photographies links
-	private String jpgSmall = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosJPG/blacklist.jpg";
-	private String jpgBig = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosJPG/bigJPG.jpg";
-	private String jpg30MB = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosJPG/30MB JPG.jpg";
-	private String pngSmall = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosPNG/Small PNG.png";
-	private String pngBigVertical = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosPNG/Big Vertical PNG.png";
-	private String gifSmall = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotoGIF/GIF Small.gif";
-	private String gifBig = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotoGIF/GIF Big.gif";
-	private String photoAVIF = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotoAVIF/AVIF Format.avif";
-
-	// Error Poruke za 'Add New Post' web lokaciju
-	private String emptyTitleErrorMessage = "This field is required.";
-	private String titleLessThan20CharErrorMessage = "Please enter at least 20 characters.";
-	private String emptyDescriptionErrorMessage = "This field is required.";
-	private String descriptionErrorMessageLessThan50Char = "Please enter at least 50 characters.";
-	private String emptyTagSelectedErrorMessage = "This field is required.";
-	private String emptyContentErrorMessage = "The content field is required.";
-	private String moreThan255CharErrorMessage = "Please enter no more than 255 characters.";
-	private String moreThan500CharErrorMessage = "Please enter no more than 500 characters.";
-	private String invalidPhotoFormatErrorMessage = "The photo must be an image.";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -81,8 +39,6 @@ public class AddNewPostTest {
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		// Na kraju izvrsavanja svih testova, pozivam 'zatvaranje' driver-a koji
-		// koristim
 		driver.close();
 	}
 
@@ -120,7 +76,7 @@ public class AddNewPostTest {
 		addPostPage.inputDescription("");
 
 		// Skrolujem do 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
@@ -157,7 +113,7 @@ public class AddNewPostTest {
 		// Ubacujem prazan String u 'Content'
 
 		// Skrolujem do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addPostPage.clickOnSave();
@@ -192,10 +148,10 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add post' web strani!", addPostPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostPage.pickCategory(categoryName);
+		addPostPage.pickCategory(Utils.categoryName);
 
 		// Skrolujem do 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
@@ -224,10 +180,10 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add post' web strani!", addPostPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostPage.pickCategory(categoryName);
+		addPostPage.pickCategory(Utils.categoryName);
 
 		// Skrolujem do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addPostPage.clickOnSave();
@@ -236,11 +192,11 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addPostPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Title error poruka - greska!", addPostPage.emptyTitleMessageError(emptyTitleErrorMessage));
+		assertTrue("Title error poruka - greska!", addPostPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addPostPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(emptyContentErrorMessage));
+				addPostPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
@@ -263,13 +219,13 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add post' web strani!", addPostPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostPage.pickCategory(categoryName);
+		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem nevalidan Title, manji od 20 karaktera
 		addPostPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
@@ -301,13 +257,13 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add post' web strani!", addPostPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostPage.pickCategory(categoryName);
+		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem Title, manji od 20 karaktera
 		addPostPage.inputTitle(Utils.generateRandomStringLessThan20());
 
 		// Skrolujem do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addPostPage.clickOnSave();
@@ -319,11 +275,11 @@ public class AddNewPostTest {
 
 		// Error poruke - provera
 		assertTrue("Title error poruka - greska!",
-				addPostPage.titleErrorMessageLessThan20Char(titleLessThan20CharErrorMessage));
+				addPostPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addPostPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(emptyContentErrorMessage));
+				addPostPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(Utils.emptyContentErrorMessage));
 
 	}
 
@@ -347,13 +303,13 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Post List' web strani!", addPostPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostPage.pickCategory(categoryName);
+		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem Title, veci od 20 karaktera
 		addPostPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
@@ -383,13 +339,13 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addPostPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa liste
-		addPostPage.pickCategory(categoryName);
+		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addPostPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addPostPage.clickOnSave();
@@ -399,9 +355,9 @@ public class AddNewPostTest {
 
 		// Error poruke - provera
 		assertTrue("Description error poruka - greska!",
-				addPostPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(emptyContentErrorMessage));
+				addPostPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
@@ -425,7 +381,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addPostPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostPage.pickCategory(categoryName);
+		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', manji od 20 karaktera
 		addPostPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
@@ -434,7 +390,7 @@ public class AddNewPostTest {
 		addPostPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
@@ -468,7 +424,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addPostPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostPage.pickCategory(categoryName);
+		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', manji od 20 karaktera
 		addPostPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
@@ -477,7 +433,7 @@ public class AddNewPostTest {
 		addPostPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
 		// Skrolujem do XPatha 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA SAVE!!
@@ -489,11 +445,11 @@ public class AddNewPostTest {
 
 		// Error poruke - provera
 		assertTrue("Title error poruka - greska!",
-				addPostPage.titleErrorMessageLessThan20Char(titleLessThan20CharErrorMessage));
+				addPostPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addPostPage.descriptionLessThan50Error(descriptionErrorMessageLessThan50Char));
-		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(emptyContentErrorMessage));
+				addPostPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
+		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
@@ -517,7 +473,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostWebPage.pickCategory(categoryName);
+		addPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -526,7 +482,7 @@ public class AddNewPostTest {
 		addPostWebPage.inputDescription(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
 
 		// Skrolujem do XPatha 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addPostWebPage.clickOnCancel();
@@ -559,7 +515,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostWebPage.pickCategory(categoryName);
+		addPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -572,7 +528,7 @@ public class AddNewPostTest {
 //		WebElement saveButton = addPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA SAVE!!
@@ -584,9 +540,9 @@ public class AddNewPostTest {
 
 		// Error poruke - provera
 		assertTrue("Description error poruka - greska!",
-				addPostWebPage.descriptionLessThan50Error(descriptionErrorMessageLessThan50Char));
-		assertTrue("TAG error poruka - greska!", addPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Content error poruka - greska!", addPostWebPage.emptyContentError(emptyContentErrorMessage));
+				addPostWebPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
+		assertTrue("TAG error poruka - greska!", addPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Content error poruka - greska!", addPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 
 	}
 
@@ -611,7 +567,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostWebPage.pickCategory(categoryName);
+		addPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -621,13 +577,21 @@ public class AddNewPostTest {
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
-//		WebElement cancelButton = addPostWebPage.getCancelButtonWebElement();
+		WebElement cancelButton = addPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollToWebElement(driver, cancelButton);
+
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Klik na 'Cancel' dugme
-		addPostWebPage.clickOnCancel();
+//		addPostWebPage.clickOnCancel();
+		cancelButton.click();
 
 		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
@@ -655,7 +619,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addPostWebPage.pickCategory(categoryName);
+		addPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -670,7 +634,7 @@ public class AddNewPostTest {
 //		Utils.scrollToWebElement(driver, saveButton);
 
 		// Skrolujem do 'Save' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addPostWebPage.clickOnSave();
@@ -679,8 +643,8 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("TAG error poruka - greska!", addPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Content error poruka - greska!", addPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("TAG error poruka - greska!", addPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Content error poruka - greska!", addPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 
 	}
 
@@ -705,7 +669,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' veci od 255 karaktera, tekst 'Title'-a, ucitavam sa
 		// eksternog '.TXT' fajla
@@ -724,7 +688,7 @@ public class AddNewPostTest {
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -757,7 +721,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' veci od 255 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_255_CHAR_RANDOM_STRING);
@@ -788,11 +752,12 @@ public class AddNewPostTest {
 
 		// Error poruke
 		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.titleMoreThan255CharErrorMessage(moreThan255CharErrorMessage));
+				addNewPostWebPage.titleMoreThan255CharErrorMessage(Utils.moreThan255CharErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.descriptionMoreThan500CharErrorMessage(moreThan500CharErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+				addNewPostWebPage.descriptionMoreThan500CharErrorMessage(Utils.moreThan500CharErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 
 	}
 
@@ -817,7 +782,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' veci od 255 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_255_CHAR_RANDOM_STRING);
@@ -830,7 +795,7 @@ public class AddNewPostTest {
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolam do 'Cancel Button' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel'
 		addNewPostWebPage.clickOnCancel();
@@ -864,7 +829,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web strani!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' veci od 255 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_255_CHAR_RANDOM_STRING);
@@ -877,7 +842,7 @@ public class AddNewPostTest {
 //		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -885,10 +850,10 @@ public class AddNewPostTest {
 
 		// Error poruke
 		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.titleMoreThan255CharErrorMessage(moreThan255CharErrorMessage));
+				addNewPostWebPage.titleMoreThan255CharErrorMessage(Utils.moreThan255CharErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.descriptionMoreThan500CharErrorMessage(moreThan500CharErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+				addNewPostWebPage.descriptionMoreThan500CharErrorMessage(Utils.moreThan500CharErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 	}
 
@@ -914,7 +879,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Post List' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Ubacujem 'Title' manji od 20 karaktera.
 		addNewPostWebPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
@@ -926,14 +891,14 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Obelezavam jedan 'TAG'
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -964,7 +929,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Ubacujem 'Title' manji od 20 karaktera.
 		addNewPostWebPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
@@ -976,14 +941,14 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Obelezavam jedan 'TAG'
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -993,10 +958,11 @@ public class AddNewPostTest {
 
 		// Error poruke - provera
 		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.titleErrorMessageLessThan20Char(titleLessThan20CharErrorMessage));
+				addNewPostWebPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.descriptionLessThan50Error(descriptionErrorMessageLessThan50Char));
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+				addNewPostWebPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
@@ -1021,7 +987,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1033,14 +999,14 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Obelezavam jedan 'TAG'
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1071,7 +1037,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' validne duzine, veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1083,14 +1049,14 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram jedan TAG
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -1099,7 +1065,8 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 
 	}
 
@@ -1126,7 +1093,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1138,17 +1105,17 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram jedan TAG
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Uzimam fotografiju sa lokalnog uredjaja
-		addNewPostWebPage.uploadPhoto(jpgSmall);
+		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1181,7 +1148,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1193,18 +1160,18 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uzimam fotografiju sa lokalnog uredjaja
-		addNewPostWebPage.uploadPhoto(jpgSmall);
+		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1237,7 +1204,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1249,18 +1216,18 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uzimam fotografiju sa lokalnog uredjaja
-		addNewPostWebPage.uploadPhoto(jpgSmall);
+		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
 		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -1269,7 +1236,8 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
@@ -1295,7 +1263,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1307,20 +1275,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(jpgSmall);
+		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(iFrameLocator));
+		Utils.scrollTo(driver, By.xpath(Utils.iFrameLocator));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel' dugmeta, preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1350,17 +1318,17 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' dugmeta preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1390,17 +1358,17 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -1409,10 +1377,11 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Title error poruka - greska!", addNewPostWebPage.emptyTitleMessageError(emptyTitleErrorMessage));
+		assertTrue("Title error poruka - greska!",
+				addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 	}
 
@@ -1436,20 +1405,20 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1479,20 +1448,20 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -1501,10 +1470,11 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Title error poruka - greska!", addNewPostWebPage.emptyTitleMessageError(emptyTitleErrorMessage));
+		assertTrue("Title error poruka - greska!",
+				addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 	}
 
@@ -1529,23 +1499,23 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', manji od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1575,23 +1545,23 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', manji od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -1601,10 +1571,10 @@ public class AddNewPostTest {
 
 		// Error poruke - provera
 		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.titleErrorMessageLessThan20Char(titleLessThan20CharErrorMessage));
+				addNewPostWebPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 	}
 
 	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
@@ -1628,23 +1598,23 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1674,23 +1644,23 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -1699,8 +1669,9 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+		assertTrue("Description error poruka - greska!",
+				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 	}
 
@@ -1726,7 +1697,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1735,17 +1706,17 @@ public class AddNewPostTest {
 		addNewPostWebPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1777,7 +1748,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1786,17 +1757,17 @@ public class AddNewPostTest {
 		addNewPostWebPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolam do 'Save Button' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -1805,9 +1776,11 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Description error poruka - greska!",addNewPostWebPage.descriptionLessThan50Error(descriptionErrorMessageLessThan50Char));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("Description error poruka - greska!",
+				addNewPostWebPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Description error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
@@ -1832,7 +1805,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1841,17 +1814,17 @@ public class AddNewPostTest {
 		addNewPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
 		// druge klase preko gettera istog
 //		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
 
 		// Skrolujem do 'Cancel' web elementa preko xPatha
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -1883,7 +1856,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1892,13 +1865,13 @@ public class AddNewPostTest {
 		addNewPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolam do 'Save' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -1907,7 +1880,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 	}
 
@@ -1933,7 +1906,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1945,16 +1918,16 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram jedan TAG
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolam do xPath-a 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel'
 		addNewPostWebPage.clickOnCancel();
@@ -1986,7 +1959,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -1998,17 +1971,17 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram jedan TAG
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Skrolam do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-//		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+//		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 		addNewPostWebPage.insertContent("Stefan");
 
 		// Skrolujem do 'Save' web elementa
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2049,7 +2022,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' iz padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2061,20 +2034,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uzimam fotografiju sa lokalnog uredjaja
-		addNewPostWebPage.uploadPhoto(jpgSmall);
+		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
 		// Skrolujem do 'Content' polja, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel'
 		addNewPostWebPage.clickOnCancel();
@@ -2108,7 +2081,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2120,20 +2093,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem fotografuju sa lokala
-		addNewPostWebPage.uploadPhoto(jpgSmall);
+		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save' web elementa, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save'
 		addNewPostWebPage.clickOnSave();
@@ -2173,7 +2146,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2185,21 +2158,21 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram tri TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
-		addNewPostWebPage.pickTAG(tagThree);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagThree);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(jpgBig);
+		addNewPostWebPage.uploadPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -2233,7 +2206,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2245,21 +2218,21 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram tri TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
-		addNewPostWebPage.pickTAG(tagThree);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagThree);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(jpgBig);
+		addNewPostWebPage.uploadPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2298,7 +2271,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2310,19 +2283,19 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram jedan TAG
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(pngSmall);
+		addNewPostWebPage.uploadPhoto(Utils.pngSmall);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -2356,7 +2329,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2368,19 +2341,19 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram jedan TAG
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(pngSmall);
+		addNewPostWebPage.uploadPhoto(Utils.pngSmall);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2419,7 +2392,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2431,20 +2404,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(pngBigVertical);
+		addNewPostWebPage.uploadPhoto(Utils.pngBigVertical);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -2478,7 +2451,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2490,20 +2463,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(pngBigVertical);
+		addNewPostWebPage.uploadPhoto(Utils.pngBigVertical);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2542,7 +2515,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2554,20 +2527,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(gifSmall);
+		addNewPostWebPage.uploadPhoto(Utils.gifSmall);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -2601,7 +2574,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2613,20 +2586,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(gifSmall);
+		addNewPostWebPage.uploadPhoto(Utils.gifSmall);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2665,7 +2638,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2677,20 +2650,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(gifBig);
+		addNewPostWebPage.uploadPhoto(Utils.gifBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(cancelButton));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
@@ -2724,7 +2697,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem validan 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.aWonderfulSerenity);
@@ -2736,20 +2709,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(gifBig);
+		addNewPostWebPage.uploadPhoto(Utils.gifBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.hardcodecContent);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.hardcodecContent);
 
 		// Skrolujem do 'Save' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2788,7 +2761,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2800,20 +2773,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem fotografiju sa lokala
-		addNewPostWebPage.uploadPhoto(jpg30MB);
+		addNewPostWebPage.uploadPhoto(Utils.jpg30MB);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save' dugmeta, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2848,10 +2821,10 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Uploadujem AVIF photo file
-		addNewPostWebPage.uploadPhoto(photoAVIF);
+		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2860,13 +2833,15 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Title error poruka - greska!", addNewPostWebPage.emptyTitleMessageError(emptyTitleErrorMessage));
+		assertTrue("Title error poruka - greska!",
+				addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
@@ -2889,13 +2864,13 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Uploadujem AVIF photo file
-		addNewPostWebPage.uploadPhoto(photoAVIF);
+		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2904,13 +2879,15 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Title error poruka - greska!", addNewPostWebPage.emptyTitleMessageError(emptyTitleErrorMessage));
+		assertTrue("Title error poruka - greska!",
+				addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
@@ -2934,16 +2911,16 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
 		// Uploadujem AVIF photo file
-		addNewPostWebPage.uploadPhoto(photoAVIF);
+		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -2952,10 +2929,13 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke);
-		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Photo error poruka - greska!", addNewPostWebPage.invalidPhotoFormatError(invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("Description error poruka - greska!",
+				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Photo error poruka - greska!",
+				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
@@ -2979,7 +2959,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -2988,10 +2968,10 @@ public class AddNewPostTest {
 		addNewPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
 		// Uploadujem AVIF photo file
-		addNewPostWebPage.uploadPhoto(photoAVIF);
+		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -3000,9 +2980,11 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Photo error poruka - greska!",addNewPostWebPage.invalidPhotoFormatError(invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Photo error poruka - greska!",
+				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
@@ -3028,7 +3010,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu kategoriju sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unostim validan 'Title'
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -3040,10 +3022,10 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Uploadujem AVIF photo file
-		addNewPostWebPage.uploadPhoto(photoAVIF);
+		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -3052,9 +3034,11 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
-		assertTrue("Photo error poruka - greska!", addNewPostWebPage.invalidPhotoFormatError(invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Photo error poruka - greska!",
+				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
@@ -3079,7 +3063,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -3091,13 +3075,13 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Obelezavam jedan 'TAG'
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Uploadujem AVIF photo file
-		addNewPostWebPage.uploadPhoto(photoAVIF);
+		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -3106,8 +3090,10 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Photo error poruka - greska!",addNewPostWebPage.invalidPhotoFormatError(invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("Photo error poruka - greska!",
+				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
@@ -3132,7 +3118,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -3144,14 +3130,14 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva 'TAG-a'
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem AVIF photo file
-		addNewPostWebPage.uploadPhoto(photoAVIF);
+		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -3160,8 +3146,10 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Photo error poruka - greska!",addNewPostWebPage.invalidPhotoFormatError(invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("Photo error poruka - greska!",
+				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
@@ -3186,7 +3174,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -3198,19 +3186,19 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram jedan 'TAG'
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Uploadujem AVIF photo file
-		addNewPostWebPage.uploadPhoto(photoAVIF);
+		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content'
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -3219,12 +3207,14 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Photo error poruka - greska!", addNewPostWebPage.invalidPhotoFormatError(invalidPhotoFormatErrorMessage));
+		assertTrue("Photo error poruka - greska!",
+				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
 	}
 
 	// Klik na 'Add new post' dugme, biram jednu 'Category' sa padajuce liste,
 	// upisujem VALIDAN 'Title' veci od 20 karaktera, upisujem VALIDAN 'Description'
-	// veci od 50 karaktera, check 'important' radio button, check dva TAG-a, ubacujem JPG fotografiju veceg formata, 
+	// veci od 50 karaktera, check 'important' radio button, check dva TAG-a,
+	// ubacujem JPG fotografiju veceg formata,
 	// unosim VALIDAN 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc62() {
@@ -3244,7 +3234,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
@@ -3256,20 +3246,20 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva 'TAG-a'
-		addNewPostWebPage.pickTAG(tagOne);
-		addNewPostWebPage.pickTAG(tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem validnu JPG fotografiju
-		addNewPostWebPage.uploadPhoto(jpgBig);
+		addNewPostWebPage.uploadPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content'
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_1000_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_1000_WORDS);
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
@@ -3283,10 +3273,10 @@ public class AddNewPostTest {
 		// Proveravam da li je post upisan na 'Post Listu'
 		postListWebPage.isPostOnTheList(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 	}
-	
+
 	// Unosim u 'Content' uzastopne prazne Stringove
 	@Test
-	public void tc63 () {
+	public void tc63() {
 		// Kreiram objekat 'Post List' web lokacije
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
 
@@ -3303,7 +3293,7 @@ public class AddNewPostTest {
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa padajuce liste
-		addNewPostWebPage.pickCategory(categoryName);
+		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
 		addNewPostWebPage.inputTitle("PRAZAN STRING CONTENT - TEST");
@@ -3315,31 +3305,29 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram jedan 'TAG'
-		addNewPostWebPage.pickTAG(tagOne);
+		addNewPostWebPage.pickTAG(Utils.tagOne);
 
 		// Uploadujem validnu JPG fotografiju
-		addNewPostWebPage.uploadPhoto(jpgBig);
+		addNewPostWebPage.uploadPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content'
-		addNewPostWebPage.inputContent(iFrameLocator, contentFieldLocator, "      ");
+		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, "      ");
 
 		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveButton));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
 
 		// Proveram da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-		
+
 		// Error poruke
-		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(emptyContentErrorMessage));
-	} 
-	
-	
-	
-	
+		assertTrue("Content error poruka - greska!",
+				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+	}
+
 }

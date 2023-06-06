@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class EditPostWebPage {
 
-	//// FIELDS
+	// FIELDS
 
 	// Driver
 	private WebDriver driver;

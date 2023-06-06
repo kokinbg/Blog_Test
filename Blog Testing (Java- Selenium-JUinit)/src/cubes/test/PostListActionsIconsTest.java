@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import cubes.helper.MyWebDriver;
+import cubes.helper.Utils;
 import cubes.loginPage.LoginPage;
 import cubes.pages.posts.PostListWebPage;
 
@@ -24,19 +25,12 @@ public class PostListActionsIconsTest {
 
 	private static WebDriver driver;
 
-	private String actionsIconTestPost = "Actions Icons Test VladimirQA";
-	private String viewPostTest = "View Test VladimirQA";
-	private String deletePostTest = "DeletePostTest VladimirQA";
-
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		// Iz 'MyWebDriver' klase, pozivam driver koji zelilm da koristim
 		driver = MyWebDriver.getDriver("chrome");
-
-		// Kreiram objekat "Login Page" web lokacije
 		LoginPage loginPage = new LoginPage(driver);
-
-		// Iz 'Login Page' klase, ozivam metodu za uspesno logovanje
+		
+		// Iz 'Login Page' klase, pozivam metodu za uspesno logovanje
 		loginPage.loginSuccess();
 	}
 
@@ -67,7 +61,7 @@ public class PostListActionsIconsTest {
 		postListWebPage.clickOnHamburger();
 
 		// Unosim naziv Title-a u Post Search
-		postListWebPage.inputTitleInSearch(viewPostTest);
+		postListWebPage.inputTitleInSearch(Utils.viewPostTest);
 
 		try {
 			Thread.sleep(1000);
@@ -76,7 +70,7 @@ public class PostListActionsIconsTest {
 			e.printStackTrace();
 		}
 		// Klik na 'View Post' icon
-		postListWebPage.clickOnView(viewPostTest);
+		postListWebPage.clickOnView(Utils.viewPostTest);
 
 		// Cekam da se 'new tab' ucita
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
@@ -93,7 +87,7 @@ public class PostListActionsIconsTest {
 				"//a[@href='https://testblog.kurs-qa.cubes.edu.rs' and contains(text(), 'View Test VladimirQA')]")));
 
 		// Proveravam da li sam na 'View Post' web lokaciji
-		assertTrue("Nisam na 'View Post' web lokaciji!", driver.getTitle().contains(viewPostTest));
+		assertTrue("Nisam na 'View Post' web lokaciji!", driver.getTitle().contains(Utils.viewPostTest));
 
 		// Vracam se na prvi TAB
 		driver.switchTo().window(tabs.get(1)).close();
@@ -116,7 +110,7 @@ public class PostListActionsIconsTest {
 		postListWebPage.clickOnHamburger();
 
 		// Unosim naziv Title-a u Post Search
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		try {
 			Thread.sleep(1000);
@@ -126,7 +120,7 @@ public class PostListActionsIconsTest {
 		}
 
 		// Klik na 'Disable Post' icon
-		postListWebPage.clickOnDisableIcon(actionsIconTestPost);
+		postListWebPage.clickOnDisableIcon(Utils.actionsIconTestPost);
 
 		// Klikni na 'Cancel' button, u pop-up prozoru
 		postListWebPage.clickOnCancelDisableButton();
@@ -135,13 +129,13 @@ public class PostListActionsIconsTest {
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 		// Unosim u 'Search Post' polje, 'Title' posta
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		// Proveri da li se post nalazi na 'Post Listi'
-		assertTrue("Disabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(actionsIconTestPost));
+		assertTrue("Disabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(Utils.actionsIconTestPost));
 
 		// Proveri da li je setovanje vraceno na 'Enabled'
-		assertTrue("Post nije disable-ovan!", postListWebPage.isPostEnabled(actionsIconTestPost));
+		assertTrue("Post nije disable-ovan!", postListWebPage.isPostEnabled(Utils.actionsIconTestPost));
 	}
 
 	// Klik na 'Disable' post, Confirm
@@ -157,7 +151,7 @@ public class PostListActionsIconsTest {
 		postListWebPage.clickOnHamburger();
 
 		// Unosim naziv Title-a u Post Search
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		try {
 			Thread.sleep(1000);
@@ -167,19 +161,19 @@ public class PostListActionsIconsTest {
 		}
 
 		// Klik na 'Disable Post' icon
-		postListWebPage.clickOnDisableIcon(actionsIconTestPost);
+		postListWebPage.clickOnDisableIcon(Utils.actionsIconTestPost);
 
 		// Klikni na 'Disable' button, u pop-up prozoru
 		postListWebPage.clickOnDisableButton();
 
 		// Unosim u 'Search Post' polje, 'Title' posta
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		// Proveri da li se 'Disabled' post nalazi na 'Post Listi'
-		assertTrue("Disabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(actionsIconTestPost));
+		assertTrue("Disabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(Utils.actionsIconTestPost));
 
 		// Proveri da li je setovan kao 'Disabled'
-		assertTrue("Post nije disable-ovan!", postListWebPage.isPostDisabled(actionsIconTestPost));
+		assertTrue("Post nije disable-ovan!", postListWebPage.isPostDisabled(Utils.actionsIconTestPost));
 
 	}
 
@@ -196,7 +190,7 @@ public class PostListActionsIconsTest {
 		postListWebPage.clickOnHamburger();
 
 		// Unosim naziv Title-a u Post Search
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		try {
 			Thread.sleep(1000);
@@ -206,19 +200,19 @@ public class PostListActionsIconsTest {
 		}
 
 		// Klik na 'Enable Post' icon
-		postListWebPage.clickOnEnableIcon(actionsIconTestPost);
+		postListWebPage.clickOnEnableIcon(Utils.actionsIconTestPost);
 
 		// Klikni na 'Cancel enable' button, u pop-up prozoru
 		postListWebPage.clickOnCancelEnableButton();
 		
 		// Unosim u 'Search Post' polje, 'Title' posta
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		// Proveri da li je post ostao na 'Post Listi'
-		assertTrue("Enabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(actionsIconTestPost));
+		assertTrue("Enabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(Utils.actionsIconTestPost));
 
 		// Proveri da li je setovan kao 'Disabled'
-		assertTrue("Post nije disable-ovan!", postListWebPage.isPostDisabled(actionsIconTestPost));
+		assertTrue("Post nije disable-ovan!", postListWebPage.isPostDisabled(Utils.actionsIconTestPost));
 	}
 
 	// Klik na 'Enable' post, Confirm
@@ -234,7 +228,7 @@ public class PostListActionsIconsTest {
 		postListWebPage.clickOnHamburger();
 
 		// Unosim naziv Title-a u Post Search
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		try {
 			Thread.sleep(1000);
@@ -244,19 +238,19 @@ public class PostListActionsIconsTest {
 		}
 
 		// Klik na 'Enable Post' icon
-		postListWebPage.clickOnEnableIcon(actionsIconTestPost);
+		postListWebPage.clickOnEnableIcon(Utils.actionsIconTestPost);
 
 		// Klikni na 'Enable' button, u pop-up prozoru
 		postListWebPage.clickOnEnableButton();
 		
 		// Unosim u 'Search Post' polje, 'Title' posta
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		// Proveri da li se 'Enabled' post nalazi na 'Post Listi'
-		assertTrue("Enabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(actionsIconTestPost));
+		assertTrue("Enabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(Utils.actionsIconTestPost));
 
 		// Proveri da li je setovan kao 'Enabled'
-		assertTrue("Post nije disable-ovan!", postListWebPage.isPostEnabled(actionsIconTestPost));
+		assertTrue("Post nije disable-ovan!", postListWebPage.isPostEnabled(Utils.actionsIconTestPost));
 	}
 
 	// Set 'Post' kao 'Unimportant', Confirm
@@ -272,7 +266,7 @@ public class PostListActionsIconsTest {
 		postListWebPage.clickOnHamburger();
 
 		// Unosim naziv Title-a u Post Search
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		try {
 			Thread.sleep(1000);
@@ -282,20 +276,20 @@ public class PostListActionsIconsTest {
 		}
 
 		// Klik na 'Unimportant' icon
-		postListWebPage.clickOnUnimportantIcon(actionsIconTestPost);
+		postListWebPage.clickOnUnimportantIcon(Utils.actionsIconTestPost);
 
 		// Klikni na 'Set as Unimportant' button, u pop-up prozoru
 		postListWebPage.clickOnSetAsUnimportantButton();
 		
 		// Unosim u 'Search Post' polje, 'Title' posta
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		// Proveri da li se 'Unimportant' post nalazi na 'Post Listi'
 		assertTrue("Unimportant post se ne nalazi na 'Post Listi'!",
-				postListWebPage.isPostOnTheList(actionsIconTestPost));
+				postListWebPage.isPostOnTheList(Utils.actionsIconTestPost));
 
 		// Proveri da li je setovan kao 'Unimportant'
-		assertTrue("Post nije setovan kao 'Unimportant'!", postListWebPage.isPostUnimportant(actionsIconTestPost));
+		assertTrue("Post nije setovan kao 'Unimportant'!", postListWebPage.isPostUnimportant(Utils.actionsIconTestPost));
 	}
 
 	// Set 'Post' kao 'Important', Confirm
@@ -311,7 +305,7 @@ public class PostListActionsIconsTest {
 		postListWebPage.clickOnHamburger();
 
 		// Unosim naziv Title-a u Post Search
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		try {
 			Thread.sleep(1000);
@@ -321,19 +315,19 @@ public class PostListActionsIconsTest {
 		}
 
 		// Klik na 'Important' icon
-		postListWebPage.clickOnImportantIcon(actionsIconTestPost);
+		postListWebPage.clickOnImportantIcon(Utils.actionsIconTestPost);
 
 		// Klikni na 'Set as Important' button, u pop-up prozoru
 		postListWebPage.clickOnSetAsImportantButton();
 		
 		// Unosim u 'Search Post' polje, 'Title' posta
-		postListWebPage.inputTitleInSearch(actionsIconTestPost);
+		postListWebPage.inputTitleInSearch(Utils.actionsIconTestPost);
 
 		// Proveri da li se 'Important' post nalazi na 'Post Listi'
-		assertTrue("Enabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(actionsIconTestPost));
+		assertTrue("Enabled post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(Utils.actionsIconTestPost));
 
 		// Proveri da li je setovan kao 'Important'
-		assertTrue("Post nije disable-ovan!", postListWebPage.isPostImportant(actionsIconTestPost));
+		assertTrue("Post nije disable-ovan!", postListWebPage.isPostImportant(Utils.actionsIconTestPost));
 	}
 
 	// Delete post, cancel delete
@@ -349,7 +343,7 @@ public class PostListActionsIconsTest {
 		postListWebPage.clickOnHamburger();
 
 		// Unosim naziv Title-a u Post Search
-		postListWebPage.inputTitleInSearch(deletePostTest);
+		postListWebPage.inputTitleInSearch(Utils.deletePostTest);
 
 		try {
 			Thread.sleep(1000);
@@ -359,16 +353,16 @@ public class PostListActionsIconsTest {
 		}
 
 		// Klik na 'Delete' icon
-		postListWebPage.clickOnDeletePostIcon(deletePostTest);
+		postListWebPage.clickOnDeletePostIcon(Utils.deletePostTest);
 
 		// Klikni na 'Cancel Delete' button, u pop-up prozoru
 		postListWebPage.clickOnCancelDeletePostButton();
 		
 		// Unosim u 'Search Post' polje, 'Title' posta
-		postListWebPage.inputTitleInSearch(deletePostTest);
+		postListWebPage.inputTitleInSearch(Utils.deletePostTest);
 
 		// Proveri da li se post nalazi na 'Post Listi'
-		assertTrue("Post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(deletePostTest));
+		assertTrue("Post se ne nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(Utils.deletePostTest));
 
 	}
 
@@ -385,7 +379,7 @@ public class PostListActionsIconsTest {
 		postListWebPage.clickOnHamburger();
 
 		// Unosim naziv Title-a u Post Search
-		postListWebPage.inputTitleInSearch(deletePostTest);
+		postListWebPage.inputTitleInSearch(Utils.deletePostTest);
 
 		try {
 			Thread.sleep(1000);
@@ -395,16 +389,16 @@ public class PostListActionsIconsTest {
 		}
 
 		// Klik na 'Delete' icon
-		postListWebPage.clickOnDeletePostIcon(deletePostTest);
+		postListWebPage.clickOnDeletePostIcon(Utils.deletePostTest);
 
 		// Klikni na 'Delete' button, u pop-up prozoru
 		postListWebPage.clickOnDeletePostButton();
 		
 		// Unosim u 'Search Post' polje, 'Title' posta
-		postListWebPage.inputTitleInSearch(deletePostTest);
+		postListWebPage.inputTitleInSearch(Utils.deletePostTest);
 
 		// Proveri da li se 'Obrisani post' post nalazi na 'Post Listi'
-		assertTrue("Obrisani post se nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(deletePostTest));
+		assertTrue("Obrisani post se nalazi na 'Post Listi'!", postListWebPage.isPostOnTheList(Utils.deletePostTest));
 
 	}
 

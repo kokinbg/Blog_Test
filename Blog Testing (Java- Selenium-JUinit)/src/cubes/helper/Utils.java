@@ -10,6 +10,40 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class Utils {
+	
+	// 'Content Field' WebElements (with iFrame)
+	public static String contentLabel = "//label[text()='Content']";
+	public static String iFrameLocator = "//iframe[@class='cke_wysiwyg_frame cke_reset']";
+	public static String contentFieldLocator = "//body[@class='cke_editable cke_editable_themed cke_contents_ltr cke_show_borders']";
+
+	// 'Cancel' dugme, xPath
+	public static String cancelButton = "//a[@class='btn btn-outline-secondary']";
+	// 'Save' dugme, xPath
+	public static String saveButton = "//button[@type='submit']";
+
+	// 'Category' Name
+	public static String categoryName = "Vladimir QA";
+
+	// Photographies links
+	public static String jpgSmall = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosJPG/blacklist.jpg";
+	public static String jpgBig = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosJPG/bigJPG.jpg";
+	public static String jpg30MB = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosJPG/30MB JPG.jpg";
+	public static String pngSmall = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosPNG/Small PNG.png";
+	public static String pngBigVertical = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotosPNG/Big Vertical PNG.png";
+	public static String gifSmall = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotoGIF/GIF Small.gif";
+	public static String gifBig = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotoGIF/GIF Big.gif";
+	public static String photoAVIF = "C:/Users/filmi/Desktop/Additonal Files/Photographies/PhotoAVIF/AVIF Format.avif";
+
+	// Error Poruke za 'Add New Post' web lokaciju
+	public static String emptyTitleErrorMessage = "This field is required.";
+	public static String titleLessThan20CharErrorMessage = "Please enter at least 20 characters.";
+	public static String emptyDescriptionErrorMessage = "This field is required.";
+	public static String descriptionErrorMessageLessThan50Char = "Please enter at least 50 characters.";
+	public static String emptyTagSelectedErrorMessage = "This field is required.";
+	public static String emptyContentErrorMessage = "The content field is required.";
+	public static String moreThan255CharErrorMessage = "Please enter no more than 255 characters.";
+	public static String moreThan500CharErrorMessage = "Please enter no more than 500 characters.";
+	public static String invalidPhotoFormatErrorMessage = "The photo must be an image.";
 
 	// EDIT Pick 'Category'
 	public static String categoryEditedNameDefault = "-- Choose Category --";
@@ -28,6 +62,11 @@ public class Utils {
 	public static String tagOne = "VladimirQA_NE_BRISI!";
 	public static String tagTwo = "VladimirQA2_NE_BRISI!";
 	public static String tagThree = "Default TAG NE BRISATI";
+	
+	// Action icon test
+	public static String actionsIconTestPost = "Actions Icons Test VladimirQA";
+	public static String viewPostTest = "View Test VladimirQA";
+	public static String deletePostTest = "DeletePostTest VladimirQA";
 
 	// Hardcoded 'Content'
 	public static String hardcodecContent = "A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart. I am alone, and feel the charm of existence in this spot, which was created for the bliss of souls like mine. I am so happy, my dear friend, so absorbed in the exquisite sense of mere tranquil existence, that I neglect my talents.";

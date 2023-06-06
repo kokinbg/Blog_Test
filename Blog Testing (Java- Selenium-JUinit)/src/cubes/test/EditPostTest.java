@@ -20,34 +20,6 @@ public class EditPostTest {
 
 	private static WebDriver driver;
 
-	// 'TAG' Names
-	private String tagOne = "VladimirQA_NE_BRISI!";
-	private String tagTwo = "VladimirQA2_NE_BRISI!";
-	private String tagThree = "Default TAG NE BRISATI";
-
-	// Photos
-	private String jpgPhoto = "C:/Users/filmi/Desktop/Final Project/Photographies/PhotosJPG/bigJPG.jpg";
-	private String pngPhoto = "C:/Users/filmi/Desktop/Final Project/Photographies/PhotosPNG/Big Vertical PNG.png";
-	private String invalidPhotoFormatAVIF = "C:/Users/filmi/Desktop/Final Project/Photographies/PhotoAVIF/AVIF Format.avif";
-	private String jpg30MB = "C:/Users/filmi/Desktop/Final Project/Photographies/PhotosJPG/30MB JPG.jpg";
-
-	// 'Cancel' button WebElement
-	public String cancelEditButtonWebElement = "//a[@class = 'btn btn-outline-secondary']";
-	public String saveEditButtonWebElement = "//button[@type='submit']";
-
-	// 'Edit Content' WebElements
-	// 'Content Field' WebElements (with iFrame)
-	private String contentLabel = "//label[text()='Content']";
-	private String iFrameLocator = "//iframe[@class='cke_wysiwyg_frame cke_reset']";
-	private String contentFieldLocator = "//body[@class='cke_editable cke_editable_themed cke_contents_ltr cke_show_borders']";
-
-	// Error poruke
-	private String emptyTitleErrorMessage = "This field is required.";
-	private String emptyDescriptionErrorMessage = "This field is required.";
-	private String emptyTagSelectedErrorMessage = "This field is required.";
-	private String emptyContentErrorMessage = "The content field is required.";
-	private String invalidPhotoFormatErrorMessage = "The photo must be an image.";
-
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
@@ -108,7 +80,7 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Skrolujem do 'Cancel Button' web elementa
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel'
 		editPostWebPage.clickOnCancelEditButton();
@@ -157,7 +129,7 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Skrolujem do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Save' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -206,7 +178,7 @@ public class EditPostTest {
 		editPostWebPage.pickCategory(Utils.categoryEditedNameDefault);
 
 		// Skrolujem do 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -258,7 +230,7 @@ public class EditPostTest {
 		editPostWebPage.pickCategory(Utils.categoryEditedNameDefault);
 
 		// Skrolujem do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -313,7 +285,7 @@ public class EditPostTest {
 		editPostWebPage.inputTitle(Utils.farFarAway);
 
 		// Skrolujem do 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -368,7 +340,7 @@ public class EditPostTest {
 		editPostWebPage.inputTitle(Utils.farFarAway);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -424,7 +396,7 @@ public class EditPostTest {
 		editPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -484,7 +456,7 @@ public class EditPostTest {
 		editPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -546,7 +518,7 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -609,7 +581,7 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -670,14 +642,14 @@ public class EditPostTest {
 		editPostWebPage.checkYesImportantRadioButton();
 
 		// Un-Check dva TAG-a
-		editPostWebPage.editPickTAG(tagOne);
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagOne);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Obelezi treci TAG
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -747,14 +719,14 @@ public class EditPostTest {
 		editPostWebPage.checkYesImportantRadioButton();
 
 		// Un-Check prva dva TAG-a
-		editPostWebPage.editPickTAG(tagOne);
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagOne);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Obelezi treci TAG (ostaje samo on obelezen)
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -824,10 +796,10 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Un-Check 'TAG Three'
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -893,10 +865,10 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Un-Check i 'TAG Three'
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -911,7 +883,7 @@ public class EditPostTest {
 
 		// Error poruke
 		assertTrue("Ni jedan TAG nije selektovan - error!",
-				editPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+				editPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 	}
 
 	// Klik na 'Edit Post' ikonicu, edit 'Category' iz 'Default' u 'Vladimir QA',
@@ -960,13 +932,13 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Un-Check 'TAG Three'
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Check 'TAG One'
-		editPostWebPage.editPickTAG(tagOne);
+		editPostWebPage.editPickTAG(Utils.tagOne);
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -1039,13 +1011,13 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Un-Check 'TAG Three'
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Check 'TAG One'
-		editPostWebPage.editPickTAG(tagOne);
+		editPostWebPage.editPickTAG(Utils.tagOne);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -1115,13 +1087,13 @@ public class EditPostTest {
 		editPostWebPage.checkYesImportantRadioButton();
 
 		// Check 'TAG Three'
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Editujem fotografiju
 		editPostWebPage.editPhoto("C:/Users/filmi/Desktop/Final Project/Photographies/PhotosPNG/Big Vertical PNG.png");
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -1191,13 +1163,13 @@ public class EditPostTest {
 		editPostWebPage.checkYesImportantRadioButton();
 
 		// Check 'TAG Three'
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Editujem fotografiju
 		editPostWebPage.editPhoto("C:/Users/filmi/Desktop/Final Project/Photographies/PhotosPNG/Big Vertical PNG.png");
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -1268,13 +1240,13 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Check preostali TAG-a (sad su tri obelezena)
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Editujem fotografiju iz PNG u JPG
-		editPostWebPage.editPhoto(jpgPhoto);
+		editPostWebPage.editPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -1345,13 +1317,13 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Check jos preostali tagTwo (ukupno 3 obelezena)
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Editujem fotografiju iz PNG u JPG
-		editPostWebPage.editPhoto(jpgPhoto);
+		editPostWebPage.editPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -1424,19 +1396,19 @@ public class EditPostTest {
 		editPostWebPage.checkYesImportantRadioButton();
 
 		// Un-check 'tagOne'
-		editPostWebPage.editPickTAG(tagOne);
+		editPostWebPage.editPickTAG(Utils.tagOne);
 
 		// Editujem fotografiju iz JPG u PNG
-		editPostWebPage.editPhoto(pngPhoto);
+		editPostWebPage.editPhoto(Utils.pngBigVertical);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Utils.CONTENT_100_WORDS' u 'Edited Text'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "Edited Text");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "Edited Text");
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -1505,19 +1477,19 @@ public class EditPostTest {
 		editPostWebPage.checkYesImportantRadioButton();
 
 		// Un-check 'tagOne'
-		editPostWebPage.editPickTAG(tagOne);
+		editPostWebPage.editPickTAG(Utils.tagOne);
 
 		// Editujem fotografiju iz JPG u PNG
-		editPostWebPage.editPhoto(pngPhoto);
+		editPostWebPage.editPhoto(Utils.pngBigVertical);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Utils.CONTENT_100_WORDS' u 'Edited Text'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "Edited Text");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "Edited Text");
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -1567,13 +1539,13 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Edited Text u 'Utils.CONTENT_100_WORDS'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -1631,13 +1603,13 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Utils.CONTENT_100_WORDS' u 'Edited Text'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -1689,16 +1661,16 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Editujem fotografiju iz PNG u JPG
-		editPostWebPage.editPhoto(jpgPhoto);
+		editPostWebPage.editPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Utils.CONTENT_100_WORDS' u 'Edited Text'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "Edited Text");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "Edited Text");
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -1754,16 +1726,16 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Editujem fotografiju iz PNG u JPG
-		editPostWebPage.editPhoto(jpgPhoto);
+		editPostWebPage.editPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Utils.CONTENT_100_WORDS' u 'Edited Text'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "Edited Text");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "Edited Text");
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -1815,19 +1787,19 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Un-check 'TAGtwo', da ostane samo 'tagThree'
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Editujem fotografiju iz JPG u PNG
-		editPostWebPage.editPhoto(pngPhoto);
+		editPostWebPage.editPhoto(Utils.pngBigVertical);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Edited Text' u 'Utils.CONTENT_100_WORDS'.
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -1874,19 +1846,19 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Un-check 'tagTWO', da ostane samo 'tagThree'
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Editujem fotografiju iz JPG u PNG
-		editPostWebPage.editPhoto(pngPhoto);
+		editPostWebPage.editPhoto(Utils.pngBigVertical);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Edited Text' u 'Utils.CONTENT_100_WORDS'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -1942,22 +1914,22 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Uncheck tagThree
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Check 'tagONE' (jedini selektovan u ovom trenutku)
-		editPostWebPage.editPickTAG(tagOne);
+		editPostWebPage.editPickTAG(Utils.tagOne);
 
 		// Editujem fotografiju iz JPG u PNG
-		editPostWebPage.editPhoto(pngPhoto);
+		editPostWebPage.editPhoto(Utils.pngBigVertical);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Utils.CONTENT_100_WORDS' u 'Edited Text'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "Edited Text");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "Edited Text");
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -2018,22 +1990,22 @@ public class EditPostTest {
 		editPostWebPage.checkNoImportantRadioButton();
 
 		// Uncheck tagThree
-		editPostWebPage.editPickTAG(tagThree);
+		editPostWebPage.editPickTAG(Utils.tagThree);
 
 		// Check 'tagOne' (jedini selektovan u ovom trenutku)
-		editPostWebPage.editPickTAG(tagOne);
+		editPostWebPage.editPickTAG(Utils.tagOne);
 
 		// Editujem fotografiju iz JPG u PNG
-		editPostWebPage.editPhoto(pngPhoto);
+		editPostWebPage.editPhoto(Utils.pngBigVertical);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Utils.CONTENT_100_WORDS' u 'Edited Text'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "Edited Text");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "Edited Text");
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2097,22 +2069,22 @@ public class EditPostTest {
 		editPostWebPage.checkYesImportantRadioButton();
 
 		// Uncheck tagONE
-		editPostWebPage.editPickTAG(tagOne);
+		editPostWebPage.editPickTAG(Utils.tagOne);
 
 		// Check tagTWO
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Editujem fotografiju iz PNG u JPG
-		editPostWebPage.editPhoto(jpgPhoto);
+		editPostWebPage.editPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Edited Text' u 'Utils.CONTENT_100_WORDS'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -2180,22 +2152,22 @@ public class EditPostTest {
 		editPostWebPage.checkYesImportantRadioButton();
 
 		// Uncheck tagOne
-		editPostWebPage.editPickTAG(tagOne);
+		editPostWebPage.editPickTAG(Utils.tagOne);
 
 		// Check tagTwo (sad jedini selektovan)
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Editujem fotografiju iz PNG u JPG
-		editPostWebPage.editPhoto(jpgPhoto);
+		editPostWebPage.editPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Edited Text' u 'Utils.CONTENT_100_WORDS'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2257,16 +2229,16 @@ public class EditPostTest {
 		// samo tagTWO je obelezen
 
 		// Editujem fotografiju iz JPG u PNG
-		editPostWebPage.editPhoto(pngPhoto);
+		editPostWebPage.editPhoto(Utils.pngBigVertical);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Edited Text' u 'Utils.CONTENT_100_WORDS'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2320,7 +2292,7 @@ public class EditPostTest {
 		editPostWebPage.inputTitle("");
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2371,7 +2343,7 @@ public class EditPostTest {
 		editPostWebPage.inputDescription("");
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2423,7 +2395,7 @@ public class EditPostTest {
 		editPostWebPage.inputDescription("");
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -2532,10 +2504,10 @@ public class EditPostTest {
 		editPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
 		// Uploadujem prethodno obrisanu 'Photo'
-		editPostWebPage.editPhoto(jpgPhoto);
+		editPostWebPage.editPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save Edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2633,7 +2605,7 @@ public class EditPostTest {
 		assertTrue("Fotografija nije obrisana!", editPostWebPage.getPhotoSrc().equalsIgnoreCase(photo));
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2703,10 +2675,10 @@ public class EditPostTest {
 		EditPostWebPage editPostWebPage = new EditPostWebPage(driver, Utils.aWonderfulSerenity);
 
 		// Uncheck tagTWO
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Skrolujem do 'Cancel' web elementa
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {
@@ -2756,10 +2728,10 @@ public class EditPostTest {
 		EditPostWebPage editPostWebPage = new EditPostWebPage(driver, Utils.aWonderfulSerenity);
 
 		// Uncheck tagTWO (nema odabranih tagova)
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Skrolujem do 'Save' web elementa
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' button
 		editPostWebPage.clickOnSaveEditButton();
@@ -2775,7 +2747,7 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Error poruke
-		assertTrue("TAG error poruka - greska", editPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+		assertTrue("TAG error poruka - greska", editPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 	}
 
 	// Klik na 'Edit Post', obrisi 'Content', klik na 'Cancel' dugme
@@ -2809,13 +2781,13 @@ public class EditPostTest {
 		// tagTwo je checkiran
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// U 'Contentu' brisem sadrzaj
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "");
 
 		// Skrolujem do 'Cancel edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
 		// Klik na 'Cancel edit' dugme
 		editPostWebPage.clickOnCancelEditButton();
@@ -2860,13 +2832,13 @@ public class EditPostTest {
 		EditPostWebPage editPostWebPage = new EditPostWebPage(driver, Utils.aWonderfulSerenity);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Brisem sadrzan iz 'Content' polja
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "");
 
 		// Skrolujem do 'Save Edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save Edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2875,7 +2847,7 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Error poruke
-		assertTrue("Description error poruka - greska!", editPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("Description error poruka - greska!", editPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 
 	}
 
@@ -2915,7 +2887,7 @@ public class EditPostTest {
 		editPostWebPage.inputDescription("");
 
 		// Skrolujem do 'Save Edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save Edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2924,9 +2896,9 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Error poruke
-		assertTrue("Title error poruka - greska!", editPostWebPage.emptyTitleError(emptyTitleErrorMessage));
+		assertTrue("Title error poruka - greska!", editPostWebPage.emptyTitleError(Utils.emptyTitleErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				editPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
+				editPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 	}
 
 	// Klik na 'Edit Post', obrisi 'Category', obrisi 'Title', obrisi 'Description',
@@ -2969,10 +2941,10 @@ public class EditPostTest {
 		editPostWebPage.inputDescription("");
 
 		// Un-check tagTwo
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Skrolujem do 'Save Edit' web elementa
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -2981,10 +2953,10 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Error poruke
-		assertTrue("Title error poruka - greska!", editPostWebPage.emptyTitleError(emptyTitleErrorMessage));
+		assertTrue("Title error poruka - greska!", editPostWebPage.emptyTitleError(Utils.emptyTitleErrorMessage));
 		assertTrue("Description error poruka - greska!",
-				editPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", editPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+				editPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", editPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 	}
 
 	// Klik na 'Edit Post', obrisi 'Category', obrisi 'Title', obrisi 'Description',
@@ -3027,16 +2999,16 @@ public class EditPostTest {
 		editPostWebPage.inputDescription("");
 
 		// Un-check tagTwo
-		editPostWebPage.editPickTAG(tagTwo);
+		editPostWebPage.editPickTAG(Utils.tagTwo);
 
 		// Skrolujem do 'Content' polje
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 		
 		// Unosim prazan 'Content'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "");
 		
 		// Skrolujem do 'Save button' web elementa
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 		
 		// Klik na 'Save' button
 		editPostWebPage.clickOnSaveEditButton();
@@ -3045,12 +3017,12 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Error poruke
-		assertTrue("Title error poruka - greska!", editPostWebPage.emptyTitleError(emptyTitleErrorMessage));
-		assertTrue("Description error poruka - greska!", editPostWebPage.emptyDescriptionError(emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", editPostWebPage.emptyTagError(emptyTagSelectedErrorMessage));
+		assertTrue("Title error poruka - greska!", editPostWebPage.emptyTitleError(Utils.emptyTitleErrorMessage));
+		assertTrue("Description error poruka - greska!", editPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!", editPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 		// Content error poruka se ne pojavljuje - BUG FOUND!
-		assertTrue("Content error poruka - greska!", editPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("Content error poruka - greska!", editPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 
 	}
 
@@ -3102,16 +3074,16 @@ public class EditPostTest {
 		// tagTwo je obelezen
 
 		// Uploadujem 'Photo'
-		editPostWebPage.editPhoto(jpgPhoto);
+		editPostWebPage.editPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 		
 		// Unosim prazan 'Content'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "");
 
 		// Skrolujem do 'Cancel button' web elementa
-		Utils.scrollTo(driver, By.xpath(cancelEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 		
 		// Klik na 'Cancel button'
 		editPostWebPage.clickOnCancelEditButton();
@@ -3159,10 +3131,10 @@ public class EditPostTest {
 		editPostWebPage.pickCategory(Utils.categoryEditedNameDefault);
 
 		// Uploaduje 'photo' nevalidnog formata
-		editPostWebPage.editPhoto(invalidPhotoFormatAVIF);
+		editPostWebPage.editPhoto(Utils.photoAVIF);
 
 		// Skrolujem do 'Save button' web elementa
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 		
 		// Klik na 'Save' button
 		editPostWebPage.clickOnSaveEditButton();
@@ -3171,7 +3143,7 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Error poruke
-		assertTrue("Invalid photo format error poruka - greska!", editPostWebPage.invalidPhotoFormatError(invalidPhotoFormatErrorMessage));
+		assertTrue("Invalid photo format error poruka - greska!", editPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
 
 	}
 
@@ -3222,16 +3194,16 @@ public class EditPostTest {
 		// tagTWO je obelezen
 
 		// Biram 'Photo'
-		editPostWebPage.editPhoto(pngPhoto);
+		editPostWebPage.editPhoto(Utils.pngBigVertical);
 		
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 		
 		// Unosim prazan 'Content'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, "");
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, "");
 
 		// Skrolujem do 'Save Button' web elementa
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 		
 		// Klin na 'Save' button
 		editPostWebPage.clickOnSaveEditButton();
@@ -3240,7 +3212,7 @@ public class EditPostTest {
 		assertTrue("Nisam na 'Edit Post' web lokaciji!", editPostWebPage.isOnEditWebPage("Edit Post"));
 
 		// Error poruke
-		assertTrue("Empty content error poruka - greska!", editPostWebPage.emptyContentError(emptyContentErrorMessage));
+		assertTrue("Empty content error poruka - greska!", editPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 
 	}
 
@@ -3292,16 +3264,16 @@ public class EditPostTest {
 		// tagTWO je obelezen
 
 		// Editujem fotografiju iz PNG u jpg30MB
-		editPostWebPage.editPhoto(jpg30MB);
+		editPostWebPage.editPhoto(Utils.jpg30MB);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Edited Text' u 'Utils.CONTENT_100_WORDS'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_100_WORDS);
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
@@ -3365,16 +3337,16 @@ public class EditPostTest {
 		// tagTWO ostavljam obelezenog
 
 		// Editujem fotografiju iz jpg30MB u regular size jpg
-		editPostWebPage.editPhoto(jpgPhoto);
+		editPostWebPage.editPhoto(Utils.jpgBig);
 
 		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(contentLabel));
+		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Editujem 'Content' iz 'Edited Text' u 'Utils.CONTENT_1000_WORDS'
-		editPostWebPage.editContent(iFrameLocator, contentFieldLocator, Utils.CONTENT_1000_WORDS);
+		editPostWebPage.editContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_1000_WORDS);
 
 		// Skrolujem do 'Save edit' dugmeta
-		Utils.scrollTo(driver, By.xpath(saveEditButtonWebElement));
+		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
 		// Klik na 'Save edit' dugme
 		editPostWebPage.clickOnSaveEditButton();
