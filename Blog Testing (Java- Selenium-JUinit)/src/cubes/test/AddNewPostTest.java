@@ -33,7 +33,7 @@ public class AddNewPostTest {
 		// Kreiram objekat "Login Page" web lokacije
 		LoginPage loginPage = new LoginPage(driver);
 
-		// Iz 'Login Page' klase, ozivam metodu za uspesno logovanje
+		// Iz 'Login Page' klase, pozivam metodu za uspesno logovanje
 		loginPage.loginSuccess();
 	}
 
