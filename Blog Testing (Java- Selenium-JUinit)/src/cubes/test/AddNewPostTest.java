@@ -27,13 +27,8 @@ public class AddNewPostTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		// Iz 'MyWebDriver' klase, pozivam driver koji zelilm da koristim
 		driver = MyWebDriver.getDriver("chrome");
-
-		// Kreiram objekat "Login Page" web lokacije
 		LoginPage loginPage = new LoginPage(driver);
-
-		// Iz 'Login Page' klase, pozivam metodu za uspesno logovanje
 		loginPage.loginSuccess();
 	}
 
@@ -50,23 +45,15 @@ public class AddNewPostTest {
 	public void tearDown() throws Exception {
 	}
 
-	// Klik na 'Add new post' dugme, sva polja ostavljam prazna, Klik na Cancel
-	// dugme
+	// Sva polja ostavljam prazna, Klik na Cancel dugme
 	@Test
 	public void tc01() {
-		// Kreiram objekat web strane 'Post List Page'
-		PostListWebPage postListPage = new PostListWebPage(driver);
 
-		// Proveravam da li sam na 'Post List Page' web lokaciji
+		PostListWebPage postListPage = new PostListWebPage(driver);
 		assertTrue("Nisam na Listi Postova!!", postListPage.checkPostListWebLocation());
 
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na Add Post web strani!", addPostPage.checkAddPostWebLocation());
 
 		// Ubacujem prazan String u 'Title'
@@ -75,33 +62,18 @@ public class AddNewPostTest {
 		// Ubacujem prazan String u 'Description'
 		addPostPage.inputDescription("");
 
-		// Skrolujem do 'Cancel' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
-
-		// Proveravam da li sam vracen na Post List web lokaciju
 		assertTrue("Nisam na 'Post List' web strani!", postListPage.checkPostListWebLocation());
 	}
 
-	// Klik na 'Add new post' dugme, sva polja ostavljam prazna, klik na 'Save'
-	// dugme
+	// Sva polja ostavljam prazna, klik na 'Save' dugme
 	@Test
 	public void tc02() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post list' web strani!!", postListPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add Post' web strani!", addPostPage.checkAddPostWebLocation());
 
 		// Ubacujem prazan String u 'Title'
@@ -110,15 +82,10 @@ public class AddNewPostTest {
 		// Ubacujem prazan String u 'Description'
 		addPostPage.inputDescription("");
 
-		// Ubacujem prazan String u 'Content'
-
-		// Skrolujem do 'Save' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
-		// Klik na 'Save' dugme
 		addPostPage.clickOnSave();
 
-		// Provera da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addPostPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
@@ -128,214 +95,124 @@ public class AddNewPostTest {
 		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError("The content field is required."));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, klik na
-	// 'Cancel' dugme
+	// Biram jednu 'Category' sa liste, klik na 'Cancel' dugme
 	@Test
 	public void tc03() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListPage = new PostListWebPage(driver);
 
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post list' web strani!!", postListPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add post' web strani!", addPostPage.checkAddPostWebLocation());
 
-		// Biram jednu 'Category' sa padajuce liste
 		addPostPage.pickCategory(Utils.categoryName);
 
-		// Skrolujem do 'Cancel' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam se vratio na 'Post list' web stranu!", postListPage.checkPostListWebLocation());
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, klik na 'Save'
-	// dugme
+	// Biram jednu 'Category' sa liste, klik na 'Save' dugme
 	@Test
 	public void tc04() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post list' web strani!!", postListPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add post' web strani!", addPostPage.checkAddPostWebLocation());
 
-		// Biram jednu 'Category' sa padajuce liste
 		addPostPage.pickCategory(Utils.categoryName);
 
-		// Skrolujem do 'Save' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
-		// Klik na 'Save' dugme
 		addPostPage.clickOnSave();
 
-		// Proveravam da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addPostPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
 		assertTrue("Title error poruka - greska!", addPostPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addPostPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("Description error poruka - greska!", addPostPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' manji od 20 karaktera, klik na 'Cancel' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' manji od 20 karaktera, klik  na 'Cancel' dugme
 	@Test
 	public void tc05() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post list' web strani!!", postListPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add post' web strani!", addPostPage.checkAddPostWebLocation());
 
-		// Biram jednu 'Category' sa padajuce liste
 		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem nevalidan Title, manji od 20 karaktera
 		addPostPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Cancel' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
 		addPostPage.clickOnCancel();
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA CANCEL DA BI SE
 		// VRATILI NA PRETHODNU STRANU!!!
 
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post list' web strani!", postListPage.checkPostListWebLocation());
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' manji od 20 karaktera, klik na 'Save' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' manji od 20 karaktera, klik na 'Save' dugme
 	@Test
 	public void tc06() {
-		// Kreiram objekat 'Post List Page' web lokacije
 		PostListWebPage postListPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'post list' web lokaciji!", postListPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add post' web strani!", addPostPage.checkAddPostWebLocation());
 
-		// Biram jednu 'Category' sa padajuce liste
 		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem Title, manji od 20 karaktera
 		addPostPage.inputTitle(Utils.generateRandomStringLessThan20());
-
-		// Skrolujem do 'Save' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
-		// Klik na 'Save' dugme
 		addPostPage.clickOnSave();
 		addPostPage.clickOnSave();
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA SAVE!!!
 
-		// Proveravam da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addPostPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Title error poruka - greska!",
-				addPostPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addPostPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("Title error poruka - greska!", addPostPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
+		assertTrue("Description error poruka - greska!", addPostPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(Utils.emptyContentErrorMessage));
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste,
-	// upisujem 'Title' veci od 20 karaktera, klik na 'Cancel' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 20 karaktera, klik na 'Cancel' dugme
 	@Test
 	public void tc07() {
-		// Kreiram objekat 'Post List Page' web lokacije
 		PostListWebPage postListPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web strani!", postListPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Post List' web strani!", addPostPage.checkAddPostWebLocation());
 
-		// Biram jednu 'Category' sa padajuce liste
 		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem Title, veci od 20 karaktera
 		addPostPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Cancel' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste,
-	// upisujem 'Title' veci od 20 karaktera, klik na 'Save' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 20 karaktera, klik na 'Save' dugme
 	@Test
 	public void tc08() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addPostPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' sa liste
@@ -344,43 +221,24 @@ public class AddNewPostTest {
 		// Upisujem 'Title', veci od 20 karaktera
 		addPostPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Save' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addPostPage.clickOnSave();
-
-		// Proveravam da li sam ostao na istoj strani
 		addPostPage.checkAddPostWebLocation();
 
 		// Error poruke - provera
-		assertTrue("Description error poruka - greska!",
-				addPostPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("Description error poruka - greska!", addPostPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' manji od 20 karaktera, upisujem 'Description' manji od 50 karaktera,
-	// klik na 'Cancel' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' manji od 20 karaktera, upisujem 'Description' manji od 50 karaktera, klik na 'Cancel' dugme
 	@Test
 	public void tc09() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addPostPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', manji od 20 karaktera
@@ -389,41 +247,25 @@ public class AddNewPostTest {
 		// Upisujem 'Description', manji od 50 karaktera
 		addPostPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Cancel' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
-		// Klik na 'Cancel' dugme
 		addPostPage.clickOnCancel();
 		addPostPage.clickOnCancel();
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA CANCEL DA BI SE
 		// VRATILI NA PRETHODNU STRANU!!!
 
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste,
-	// upisujem 'Title' manji od 20 karaktera, upisujem 'Description' manji od 50
+	// Biram jednu 'Category' sa liste, upisujem 'Title' manji od 20 karaktera, upisujem 'Description' manji od 50
 	// karaktera, klik na 'Save' dugme
 	@Test
 	public void tc10() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addPostPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addPostPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', manji od 20 karaktera
@@ -432,47 +274,29 @@ public class AddNewPostTest {
 		// Upisujem 'Description', manji od 50 karaktera
 		addPostPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
-		// Skrolujem do XPatha 'Save' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
-		// Klik na 'Save' dugme
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA SAVE!!
 		addPostPage.clickOnSave();
 		addPostPage.clickOnSave();
 
-		// Proveravam da li sam ostao na istoj strani
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addPostPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Title error poruka - greska!",
-				addPostPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addPostPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
+		assertTrue("Title error poruka - greska!", addPostPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
+		assertTrue("Description error poruka - greska!", addPostPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
 		assertTrue("TAG error poruka - greska!", addPostPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 		assertTrue("Content error poruka - greska!", addPostPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera, upisujem 'Description' manji od 50 karaktera,
-	// klik na 'Cancel' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 20 karaktera, upisujem 'Description' manji od 50 karaktera, klik na 'Cancel' dugme
 	@Test
 	public void tc11() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -481,40 +305,25 @@ public class AddNewPostTest {
 		// Upisujem 'Description', manji od 50 karaktera
 		addPostWebPage.inputDescription(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
 
-		// Skrolujem do XPatha 'Cancel' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
-		// Klik na 'Cancel' dugme
 		addPostWebPage.clickOnCancel();
 		addPostWebPage.clickOnCancel();
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA CANCEL DA BI SE
 		// VRATILI NA PRETHODNU STRANU!!!
 
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
+	// Biram jednu 'Category' sa liste, upisujem
 	// 'Title' veci od 20 karaktera, upisujem 'Description' manji od 50 karaktera,
-	// klik na 'Save' dugme
 	@Test
 	public void tc12() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -523,50 +332,29 @@ public class AddNewPostTest {
 		// Upisujem 'Description', manji od 50 karaktera
 		addPostWebPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addPostWebPage.getSaveButtonWebElement();
-
-		// Skrolujem do 'Save' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
-		// Klik na 'Save' dugme
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA SAVE!!
 		addPostWebPage.clickOnSave();
 		addPostWebPage.clickOnSave();
 
-		// Proveravam da li sam ostao na istoj strani
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Description error poruka - greska!",
-				addPostWebPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
+		assertTrue("Description error poruka - greska!", addPostWebPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
 		assertTrue("TAG error poruka - greska!", addPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 		assertTrue("Content error poruka - greska!", addPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera, upisujem 'Description' veci od 50 karaktera,
-	// klik na 'Cancel' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, klik na 'Cancel' dugme
 	@Test
 	public void tc13() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -582,43 +370,18 @@ public class AddNewPostTest {
 		// Skrolujem do 'Cancel' web elementa preko xPatha
 		Utils.scrollToWebElement(driver, cancelButton);
 
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		// Klik na 'Cancel' dugme
-//		addPostWebPage.clickOnCancel();
 		cancelButton.click();
-
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera, upisujem 'Description' veci od 50 karaktera,
-	// klik na 'Save' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 20 karaktera, upisujem 'Description' veci od 50 karaktera,
 	@Test
 	public void tc14() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -627,48 +390,25 @@ public class AddNewPostTest {
 		// Upisujem 'Description', veci od 50 karaktera
 		addPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addPostWebPage.getSaveButtonWebElement();
-//		// Skrolujem do 'Save' web elementa pozvanog preko gettera!
-//		Utils.scrollToWebElement(driver, saveButton);
-
-		// Skrolujem do 'Save' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addPostWebPage.clickOnSave();
 
-		// Proveravam da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
 		assertTrue("TAG error poruka - greska!", addPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 		assertTrue("Content error poruka - greska!", addPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste,
-	// upisujem 'Title' veci od 255 karaktera, upisujem 'Description' manji od 50
-	// karaktera, klik na 'Cancel' dugme
+	// Biram jednu 'Category' sa liste,
+	// upisujem 'Title' veci od 255 karaktera, upisujem 'Description' manji od 50 karaktera, klik na 'Cancel' dugme
 	@Test
 	public void tc15() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' veci od 255 karaktera, tekst 'Title'-a, ucitavam sa
@@ -683,44 +423,25 @@ public class AddNewPostTest {
 		// Upisujem 'Description', manji od 50 karaktera
 		addNewPostWebPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
 		addNewPostWebPage.clickOnCancel();
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA CANCEL DA BI SE
 		// VRATILI NA PRETHODNU STRANU!!!
 
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 255 karaktera,
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 255 karaktera,
 	// upisujem 'Description' manji od 50 karaktera, klik na 'Save' dugme
 	@Test
 	public void tc16() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' veci od 255 karaktera
@@ -733,55 +454,31 @@ public class AddNewPostTest {
 		// druge klase preko gettera istog
 		WebElement saveButton2 = addNewPostWebPage.getSaveButtonWebElement();
 
-		// Skrolujem do 'Save' web elementa preko xPatha
 		Utils.scrollToWebElement(driver, saveButton2);
-//		try {
-//			Thread.sleep(2000);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		// Klik na 'Save' dugme
+
 		addNewPostWebPage.clickOnSave();
 		addNewPostWebPage.clickOnSave();
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA SAVE!!
 		// DA BI TEST IZVRSIO SVE USLOVE I DA BI SE POJAVILE SVE ERROR PORUKE!!
 
-		// Proveravam da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.titleMoreThan255CharErrorMessage(Utils.moreThan255CharErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.descriptionMoreThan500CharErrorMessage(Utils.moreThan500CharErrorMessage));
+		assertTrue("Title error poruka - greska!", addNewPostWebPage.titleMoreThan255CharErrorMessage(Utils.moreThan255CharErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.descriptionMoreThan500CharErrorMessage(Utils.moreThan500CharErrorMessage));
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
-
+		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 255 karaktera,
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 255 karaktera,
 	// upisujem 'Description' veci od 500 karaktera, klik na 'Cancel' dugme
 	@Test
 	public void tc17() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' veci od 255 karaktera
@@ -790,45 +487,26 @@ public class AddNewPostTest {
 		// Upisujem 'Description' veci od 500 karaktera
 		addNewPostWebPage.inputDescription(Utils.MORE_THAN_500_CHAR_RANDOM_STRING);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolam do 'Cancel Button' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
 
-		// Klik na 'Cancel'
 		addNewPostWebPage.clickOnCancel();
 		addNewPostWebPage.clickOnCancel();
 		// NAPOMENA: VELIKI ERROR! POTREBNO JE DVA PUTA KLIKNUTI NA CANCEL DA BI SE
 		// VRATILI NA PRETHODNU STRANU!!!
 
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 255 karaktera,
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 255 karaktera,
 	// upisujem 'Description' veci od 500 karaktera, klik na 'Save' dugme
 	@Test
 	public void tc18() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
 
-		// Kreiram objekat web strane 'Add New Post'
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web strani
 		assertTrue("Nisam na 'Add New Post' web strani!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' veci od 255 karaktera
@@ -837,48 +515,26 @@ public class AddNewPostTest {
 		// Upisujem 'Description' veci od 500 karaktera
 		addNewPostWebPage.inputDescription(Utils.MORE_THAN_500_CHAR_RANDOM_STRING);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
-
-		// Skrolujem do 'Save' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
 		addNewPostWebPage.clickOnSave();
 
 		// Error poruke
-		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.titleMoreThan255CharErrorMessage(Utils.moreThan255CharErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.descriptionMoreThan500CharErrorMessage(Utils.moreThan500CharErrorMessage));
+		assertTrue("Title error poruka - greska!", addNewPostWebPage.titleMoreThan255CharErrorMessage(Utils.moreThan255CharErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.descriptionMoreThan500CharErrorMessage(Utils.moreThan500CharErrorMessage));
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' manji od 20 karaktera,
-	// upisujem 'Description' manji od 50 karaktera, check 'important' radio button,
-	// check jedan 'TAG', klik na 'Cancel' dugme
+	// Biram jednu 'Category' sa liste, upisujem'Title' manji od 20 karaktera,
+	// upisujem 'Description' manji od 50 karaktera, check 'important' radio button, check jedan 'TAG', klik na 'Cancel' dugme
 	@Test
 	public void tc19() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Ubacujem 'Title' manji od 20 karaktera.
@@ -893,42 +549,21 @@ public class AddNewPostTest {
 		// Obelezavam jedan 'TAG'
 		addNewPostWebPage.pickTAG(Utils.tagOne);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' manji od 20 karaktera,
-	// upisujem 'Description' manji od 50 karaktera, check 'important' radio button,
-	// check jedan 'TAG', klik na 'Save' dugme.
+	// Biram jednu 'Category' sa liste, upisujem 'Title' manji od 20 karaktera,
+	// upisujem 'Description' manji od 50 karaktera, check 'important' radio button, check jedan 'TAG', klik na 'Save' dugme.
 	@Test
 	public void tc20() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Ubacujem 'Title' manji od 20 karaktera.
@@ -943,50 +578,25 @@ public class AddNewPostTest {
 		// Obelezavam jedan 'TAG'
 		addNewPostWebPage.pickTAG(Utils.tagOne);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
-
-		// Skrolujem do 'Save' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam ostao na istoj strani
 		addNewPostWebPage.checkAddPostWebLocation();
 
 		// Error poruke - provera
-		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("Title error poruka - greska!", addNewPostWebPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
+		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check jedan TAG, klik na 'Cancel' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check jedan TAG, klik na 'Cancel' dugme
 	@Test
 	public void tc21() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1001,42 +611,20 @@ public class AddNewPostTest {
 		// Obelezavam jedan 'TAG'
 		addNewPostWebPage.pickTAG(Utils.tagOne);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' validne duzine, veci od 20 karaktera,
-	// upisujem 'Description' validne duzine, veci od 50 karaktera, check
-	// 'important' radio button, check jedan TAG, klik na 'Save' dugme
+	// Biram jednu 'Category' sa liste, upisujem 'Title' validne duzine, veci od 20 karaktera,
+	// upisujem 'Description' validne duzine, veci od 50 karaktera, check 'important' radio button, check jedan TAG, klik na 'Save' dugme
 	@Test
 	public void tc22() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title' validne duzine, veci od 20 karaktera
@@ -1051,48 +639,24 @@ public class AddNewPostTest {
 		// Biram jedan TAG
 		addNewPostWebPage.pickTAG(Utils.tagOne);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
-
-		// Skrolujem do 'Save' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam ostao na istoj strani
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
-
+		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check jedan TAG,
+	// Biram jednu 'Category' sa liste, upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check jedan TAG,
 	// ubacujem JPG photo, klik na 'Cancel' dugme
 	@Test
 	public void tc23() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1110,44 +674,22 @@ public class AddNewPostTest {
 		// Uzimam fotografiju sa lokalnog uredjaja
 		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste,
-	// upisujem'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva 'TAG'-a,
+	// Biram jednu 'Category' sa liste, upisujem'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check dva 'TAG'-a,
 	// ubacujem fotografiju, klik na 'Cancel' dugme
 	@Test
 	public void tc24() {
-		// Kreiram objekat web strane 'Post List Page'
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1166,44 +708,22 @@ public class AddNewPostTest {
 		// Uzimam fotografiju sa lokalnog uredjaja
 		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post list' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva 'TAG-a',
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check dva 'TAG-a',
 	// ubacujem fotografiju, klik na 'Save' dugme
 	@Test
 	public void tc25() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1221,48 +741,30 @@ public class AddNewPostTest {
 
 		// Uzimam fotografiju sa lokalnog uredjaja
 		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
-
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
 
 		// Skrolujem do 'Save' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
 
 		// Proveravam da li sam ostao na istoj strani
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
 	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva TAG-a,
-	// ubacujem fotografiju, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
+	// check dva TAG-a, ubacujem fotografiju, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc26() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1281,422 +783,226 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.iFrameLocator));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Cancel' dugmeta, preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 	}
 
-	// Klik na 'Add new post' dugme, unosim samo 'Content' od 100 reci, klik na
-	// 'Cancel' dugme
+	// Unosim samo'Content'od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc27() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' dugmeta preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 	}
 
-	// Klik na 'Add new post' dugme, unosim samo 'Content' od 100 reci, klik na
-	// 'Save' dugme
+	// Unosim samo'Content'od 100 reci,klik na 'Save' dugme
 	@Test
 	public void tc28() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
-
-		// Skrolujem do 'Save' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam ostao na istoj strani
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("Title error poruka - greska!", addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, unosim
-	// 'Content' od 100 reci, klik na 'Cancel' dugme
+	// biram jednu'Category' sa liste,unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc29() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
-
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
+		
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, unosim
-	// 'Content' od 100 reci, klik na 'Save' dugme
+	// biram jednu'Category' sa liste,unosim 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc30() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
-
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
-
-		// Skrolujem do 'Save' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("Title error poruka - greska!", addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' manji od 20 karaktera, unosim 'Content' od 100 reci, klik na 'Cancel'
-	// dugme
+	// Biram jednu'Category' sa liste,upisujem
+	// 'Title' manji od 20 karaktera, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc31() {
-		// Kreiram objekat web strane 'Post List Page'
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', manji od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' manji od 20 karaktera, unosim 'Content', klik na 'Save' dugme
+	// Biram jednu'Category' sa liste,upisujem 'Title' manji od 20 karaktera, unosim 'Content', klik na 'Save' dugme
 	@Test
 	public void tc32() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', manji od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.LESS_THAN_20_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
-
-		// Skrolujem do 'Save' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("Title error poruka - greska!", addNewPostWebPage.titleErrorMessageLessThan20Char(Utils.titleLessThan20CharErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera, unosim 'Content' od 100 reci, klik na 'Cancel'
-	// dugme
+	// biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc33() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveram da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera, unosim 'Content' od 100 reci, klik na 'Save'
-	// dugme
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera, unosim 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc34() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
-
-		// Skrolujem do 'Save' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera, upisujem 'Description' manji od 50 karaktera,
-	// unosim 'Content' od 100 reci,
-	// klik na 'Cancel' dugme
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera, upisujem 'Description' manji od 50 karaktera,
+	// unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc35() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1705,49 +1011,27 @@ public class AddNewPostTest {
 		// Upisujem 'Description', manji od 50 karaktera
 		addNewPostWebPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
+	// biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
 	// upisujem 'Description' manji od 50 karaktera, unosim 'Content' od 100 reci,
-	// klik na 'Save' dugme
 	@Test
 	public void tc36() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1756,55 +1040,31 @@ public class AddNewPostTest {
 		// Upisujem 'Description', manji od 50 karaktera
 		addNewPostWebPage.inputDescription(Utils.LESS_THAN_50_CHAR_RANDOM_STRING);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Save Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement saveButton = addNewPostWebPage.getSaveButtonWebElement();
-
-		// Skrolam do 'Save Button' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke - provera
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.descriptionLessThan50Error(Utils.descriptionErrorMessageLessThan50Char));
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, unosim 'Content' od 100 reci,
-	// klik na 'Cancel' dugme
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc37() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1813,49 +1073,27 @@ public class AddNewPostTest {
 		// Upisujem 'Description', veci od 50 karaktera
 		addNewPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Kreiram objekat Web Element 'Cancel Button' i pozivam njegove parametre iz
-		// druge klase preko gettera istog
-//		WebElement cancelButton = addNewPostWebPage.getCancelButtonWebElement();
-
-		// Skrolujem do 'Cancel' web elementa preko xPatha
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, unosim 'Content', klik na 'Save'
-	// dugme
+	// biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, unosim 'Content', klik na 'Save' dugme
 	@Test
 	public void tc38() {
-		// Kreiram objekat web strane 'Post List Page'
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1864,48 +1102,29 @@ public class AddNewPostTest {
 		// Upisujem 'Description', veci od 50 karaktera
 		addNewPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolam do 'Save' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam dali sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Error poruke - provera
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
 	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
 	// check jedan TAG, unosim 'Content', klik na 'Cancel' dugme
 	@Test
 	public void tc39() {
-		// Kreiram objekat web strane 'Post List Page'
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1920,45 +1139,27 @@ public class AddNewPostTest {
 		// Biram jedan TAG
 		addNewPostWebPage.pickTAG(Utils.tagOne);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolam do xPath-a 'Cancel' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel'
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
+	// biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
 	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
 	// check jedan TAG, unosim 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc40() {
-		// Kreiram objekat web strane 'Post List Page'
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List Page' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -1973,53 +1174,31 @@ public class AddNewPostTest {
 		// Biram jedan TAG
 		addNewPostWebPage.pickTAG(Utils.tagOne);
 
-		// Skrolam do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
-
-		// Unostim sadrzaj u 'Content' polje
-//		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 		addNewPostWebPage.insertContent("Stefan");
 
-		// Skrolujem do 'Save' web elementa
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam se vratio na 'Post List' web stranu
 		assertTrue("Nisam na 'Post List' web lokaciji", postListWebPage.checkPostListWebLocation());
 
 		// Uneti 'New Post Title' u search input polje
 		postListWebPage.inputTitleInSearch(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 
-		// Proveravam da li je 'New Post' prisutan na 'Post List' web lokaciji
-		assertTrue("New Post se ne nealazi na 'Post List' web lokaciji!",
-				postListWebPage.isPostOnTheList(Utils.MORE_THAN_20_CHAR_RANDOM_STRING));
+		assertTrue("New Post se ne nealazi na 'Post List' web lokaciji!", postListWebPage.isPostOnTheList(Utils.MORE_THAN_20_CHAR_RANDOM_STRING));
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva TAG-a,
-	// ubacujem JPG fotografiju malog formata, unosim 'Content od 100 reci', klik na
-	// 'Cancel' dugme
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera, upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
+	// check dva TAG-a, ubacujem JPG fotografiju malog formata, unosim 'Content od 100 reci', klik na 'Cancel' dugme
 	@Test
 	public void tc41() {
-		// Kreiram objekat 'Post List' web lokacije
-		PostListWebPage postListWebPage = new PostListWebPage(driver);
+		
+		PostListWebPage postListWebPage=new PostListWebPage(driver);
+		assertTrue("Nisam na 'Post List' web lokaciji!",postListWebPage.checkPostListWebLocation());
 
-		// Proveravam da li sam na 'Post List' web lokaciji
-		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
-		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
-		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
+		AddNewPostWebPage addNewPostWebPage=new AddNewPostWebPage(driver);
+		assertTrue("Nisam na 'Add New Post' web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu 'Category' iz padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
@@ -2034,53 +1213,33 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva TAG-a
-		addNewPostWebPage.pickTAG(Utils.tagOne);
-		addNewPostWebPage.pickTAG(Utils.tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uzimam fotografiju sa lokalnog uredjaja
 		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
-		// Skrolujem do 'Content' polja, preko xPath-a
-		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
+		Utils.scrollTo(driver,By.xpath(Utils.contentLabel));
 
 		// Unostim sadrzaj u 'Content' polje
-		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
-
-		// Skrolujem do 'Cancel' dugmeta
-		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel'
+		addNewPostWebPage.inputContent(Utils.iFrameLocator,Utils.contentFieldLocator,Utils.CONTENT_100_WORDS);
+		
+		Utils.scrollTo(driver,By.xpath(Utils.cancelButton));
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveram da li sam se vratio na 'Post List' web lokaciju
-		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
+		assertTrue("Nisam na 'Post List' web lokaciji!",postListWebPage.checkPostListWebLocation());
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
 	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva TAG-a,
-	// ubacujem JPG fotografiju malog formata, unosim 'Content od 100 reci', klik na
-	// 'Save' dugme
+	// check dva TAG-a, ubacujem JPG fotografiju malog formata, unosim 'Content od 100 reci', klik na 'Save' dugme
 	@Test
 	public void tc42() {
-		// Kreiram objekat 'Post List' web lokacije
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2099,19 +1258,13 @@ public class AddNewPostTest {
 		// Uploadujem fotografuju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.jpgSmall);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Save' web elementa, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save'
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 		// Uneti 'New Post Title' u search input polje
@@ -2119,33 +1272,20 @@ public class AddNewPostTest {
 
 		// Proveravam da li je 'New Post' prisutan na 'Post List' web lokaciji
 		postListWebPage.isPostOnTheList(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
+	// biram jednu'Category' sa liste,upisujem
 	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check tri TAG-a,
-	// ubacujem JPG fotografiju velikog formata, unosim 'Content' od 100 reci, klik
-	// na 'Cancel' dugme
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check tri TAG-a,
+	// ubacujem JPG fotografiju velikog formata, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc43() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2165,47 +1305,27 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.jpgBig);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check tri TAG-a,
-	// ubacujem JPG fotografiju velikog formata, unosim 'Content' od 100 reci, klik
-	// na 'Save' dugme
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check tri TAG-a,
+	// ubacujem JPG fotografiju velikog formata, unosim 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc44() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2225,19 +1345,13 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.jpgBig);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Save' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 		// Uneti 'New Post Title' u search input polje
@@ -2247,30 +1361,17 @@ public class AddNewPostTest {
 		postListWebPage.isPostOnTheList(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
 	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check jedan TAG,
-	// ubacujem PNG fotografiju malog formata, unosim 'Content' od 100 reci, klik na
-	// 'Cancel' dugme
+	// check jedan TAG, ubacujem PNG fotografiju malog formata, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc45() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2288,47 +1389,27 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.pngSmall);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check jedan TAG,
-	// ubacujem PNG fotografiju malog formata, unosim 'Content' od 100 reci, klik na
-	// 'Save' dugme
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check jedan TAG,
+	// ubacujem PNG fotografiju malog formata, unosim 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc46() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2346,7 +1427,6 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.pngSmall);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
@@ -2355,7 +1435,6 @@ public class AddNewPostTest {
 		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
 
 		// Proveravam da li sam se vratio na 'Post List' web lokaciju
@@ -2368,30 +1447,17 @@ public class AddNewPostTest {
 		postListWebPage.isPostOnTheList(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva TAG-a,
-	// ubacujem PNG fotografiju velikog formata, unosim 'Content' od 100 reci, klik
-	// na 'Cancel' dugme
+	// biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check dva TAG-a,
+	// ubacujem PNG fotografiju velikog formata, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc47() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2410,47 +1476,28 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.pngBigVertical);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
 	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva TAG-a,
-	// ubacujem PNG fotografiju velikog formata, unosim 'Content' od 100 reci, klik
-	// na 'Save' dugme
+	// check dva TAG-a, ubacujem PNG fotografiju velikog formata, unosim 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc48() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2469,19 +1516,13 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.pngBigVertical);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Save' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 		// Uneti 'New Post Title' u search input polje
@@ -2491,30 +1532,17 @@ public class AddNewPostTest {
 		postListWebPage.isPostOnTheList(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva TAG-a,
-	// ubacujem GIF fotografiju malog formata, unosim 'Content' od 100 reci, klik na
-	// 'Cancel' dugme
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check dva TAG-a,
+	// ubacujem GIF fotografiju malog formata, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc49() {
-		// Kreiram objekat 'Post List' web strane
+
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2533,47 +1561,28 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.gifSmall);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
-	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva TAG-a,
-	// ubacujem GIF fotografiju malog formata, unosim 'Content' od 100 reci, klik na
-	// 'Save' dugme
+	// Biram jednu'Category'sa liste,upisujem 'Title' veci od 20 karaktera,
+	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button, check dva TAG-a,
+	// ubacujem GIF fotografiju malog formata, unosim 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc50() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2592,19 +1601,13 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.gifSmall);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Save' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 		// Uneti 'New Post Title' u search input polje
@@ -2614,35 +1617,22 @@ public class AddNewPostTest {
 		postListWebPage.isPostOnTheList(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
 	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva TAG-a,
-	// ubacujem GIF fotografiju velikog formata, unosim 'Content' od 100 reci, klik
-	// na 'Cancel' dugme
+	// check dva TAG-a, ubacujem GIF fotografiju velikog formata, unosim 'Content' od 100 reci, klik na 'Cancel' dugme
 	@Test
 	public void tc51() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
 		addNewPostWebPage.inputTitle(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
-
+		
 		// Upisujem 'Description', veci od 50 karaktera
 		addNewPostWebPage.inputDescription(Utils.DESCRIPTION_MORE_THAN_50);
 
@@ -2656,47 +1646,27 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.gifBig);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
 
-		// Skrolujem do 'Cancel' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.cancelButton));
-
-		// Klik na 'Cancel' dugme
 		addNewPostWebPage.clickOnCancel();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// 'Title' veci od 20 karaktera,
+	// Biram jednu'Category' sa liste,upisujem 'Title' veci od 20 karaktera,
 	// upisujem 'Description' veci od 50 karaktera, check 'important' radio button,
-	// check dva TAG-a,
-	// ubacujem GIF fotografiju velikog formata, unosim 'Content' od 100 reci, klik
-	// na 'Save' dugme
+	// check dva TAG-a, ubacujem GIF fotografiju velikog formata, unosim 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc52() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem validan 'Title', veci od 20 karaktera
@@ -2715,19 +1685,13 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.gifBig);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.hardcodecContent);
 
-		// Skrolujem do 'Save' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 		// Uneti 'New Post Title' u search input polje
@@ -2737,30 +1701,17 @@ public class AddNewPostTest {
 		postListWebPage.isPostOnTheList(Utils.aWonderfulSerenity);
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa liste, upisujem
-	// VALIDAN 'Title' (veci od 20 karaktera),
+	// Biram jednu'Category' sa liste,upisujem VALIDAN 'Title' (veci od 20 karaktera),
 	// upisujem VALIDAN 'Description' (veci od 50 karaktera), check 'important'
-	// radio button, check dva TAG-a,
-	// ubacujem 30MB tesku JPG fotografiju, unosim 'Content' od 100 reci, klik na
-	// 'Save' dugme
+	// radio button, check dva TAG-a, ubacujem 30MB tesku JPG fotografiju, unosim 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc53() {
-		// Kreiram objekat 'Post List' web strane
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Upisujem 'Title', veci od 20 karaktera
@@ -2779,7 +1730,6 @@ public class AddNewPostTest {
 		// Uploadujem fotografiju sa lokala
 		addNewPostWebPage.uploadPhoto(Utils.jpg30MB);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content' od 100 reci
@@ -2788,10 +1738,7 @@ public class AddNewPostTest {
 		// Skrolujem do 'Save' dugmeta, preko xPath-a
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
 
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveravam da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 		// Uneti 'New Post Title' u search input polje
@@ -2801,116 +1748,68 @@ public class AddNewPostTest {
 		postListWebPage.isPostOnTheList(Utils.MORE_THAN_20_CHAR_RANDOM_STRING);
 	}
 
-	// Klik na 'Add New Post' dugme, uploadujem samo 'invalid' photo format, klik na
-	// 'Save' dugme
+	// uploadujem samo'invalid' photo format, klik na 'Save' dugme
 	@Test
 	public void tc54() {
-		// Kreiram objekat 'Post List' web lokacije
-		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
-		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
+		
+		PostListWebPage postListWebPage=new PostListWebPage(driver);
+		assertTrue("Nisam na 'Post List' web lokaciji!",postListWebPage.checkPostListWebLocation());
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
-		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
-		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
+		AddNewPostWebPage addNewPostWebPage=new AddNewPostWebPage(driver);
+		assertTrue("Nisam na 'Add New Post' web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 
 		// Uploadujem AVIF photo file
 		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
-		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
+		Utils.scrollTo(driver,By.xpath(Utils.saveButton));
 		addNewPostWebPage.clickOnSave();
 
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji!
-		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
+		assertTrue("Nisam na 'Add New Post web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
-		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("Title error poruka - greska!",addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
+		assertTrue("Description error poruka - greska!",addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("TAG error poruka - greska!",addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Photo error poruka - greska!",addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
-	// uploadujem 'invalid' photo format, klik na 'Save' dugme
+	// Biram jednu'Category' sa padajuce liste, uploadujem 'invalid' photo format, klik na 'Save' dugme
 	@Test
 	public void tc55() {
-		// Kreiram objekat 'Post List' web lokacije
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Uploadujem AVIF photo file
 		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
-		// Skroluje do 'Save' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji!
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Title error poruka - greska!",
-				addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("Title error poruka - greska!", addNewPostWebPage.emptyTitleMessageError(Utils.emptyTitleErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
-		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("Photo error poruka - greska!", addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
-	// upisujem 'Title' validne duzine, uploadujem 'invalid' photo format, klik na
-	// 'Save' dugme
+	// biram jednu'Category' sa padajuce liste,
+	// upisujem 'Title' validne duzine, uploadujem 'invalid' photo format, klik na 'Save' dugme
 	@Test
 	public void tc56() {
-		// Kreiram objekat 'Post List' web lokacije
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
@@ -2919,46 +1818,27 @@ public class AddNewPostTest {
 		// Uploadujem AVIF photo file
 		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
-		// Skroluje do 'Save' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji!
 		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke);
-		assertTrue("Description error poruka - greska!",
-				addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
+		assertTrue("Description error poruka - greska!", addNewPostWebPage.emptyDescriptionError(Utils.emptyDescriptionErrorMessage));
 		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
-		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("Photo error poruka - greska!", addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
-	// unosim validan 'Title', unosim validan 'Description', uploadujem 'invalid'
+	// biram jednu'Category' sa padajuce liste, unosim validan 'Title', unosim validan 'Description', uploadujem 'invalid'
 	// photo format, klik na 'Save' dugme
 	@Test
 	public void tc57() {
-		// Kreiram objekat 'Post List' web lokacije
-		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
-		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
+		
+		PostListWebPage postListWebPage=new PostListWebPage(driver);
+		assertTrue("Nisam na 'Post List' web lokaciji!",postListWebPage.checkPostListWebLocation());
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
-		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
-		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
+		AddNewPostWebPage addNewPostWebPage=new AddNewPostWebPage(driver);
+		assertTrue("Nisam na 'Add New Post' web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
@@ -2970,44 +1850,28 @@ public class AddNewPostTest {
 		// Uploadujem AVIF photo file
 		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
-		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
+		Utils.scrollTo(driver,By.xpath(Utils.saveButton));
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji!
-		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
+		assertTrue("Nisam na 'Add New Post web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
-		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("TAG error poruka - greska!",addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Photo error poruka - greska!",addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		
 	}
 
-	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
-	// unosim validan 'Title',
+	// Biram jednu'Category'sa padajuce liste, unosim validan 'Title',
 	// unosim validan 'description', check 'Important' radio button, uploadujem
-	// 'invalid' photo format, klik na
-	// 'Save' dugme
+	// 'invalid' photo format, klik na 'Save' dugme
 	@Test
 	public void tc58() {
-		// Kreiram objekat 'Post List' web lokacije
-		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
-		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
+		
+		PostListWebPage postListWebPage=new PostListWebPage(driver);
+		assertTrue("Nisam na 'Post List' web lokaciji!",postListWebPage.checkPostListWebLocation());
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
-		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
-		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
+		AddNewPostWebPage addNewPostWebPage=new AddNewPostWebPage(driver);
+		assertTrue("Nisam na 'Add New Post' web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 
 		// Biram jednu kategoriju sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
@@ -3024,45 +1888,27 @@ public class AddNewPostTest {
 		// Uploadujem AVIF photo file
 		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
-		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
+		Utils.scrollTo(driver,By.xpath(Utils.saveButton));
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji!
-		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
+		assertTrue("Nisam na 'Add New Post web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("TAG error poruka - greska!", addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
-		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("TAG error poruka - greska!",addNewPostWebPage.emptyTagError(Utils.emptyTagSelectedErrorMessage));
+		assertTrue("Photo error poruka - greska!",addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
+	// Biram jednu'Category' sa padajuce liste,
 	// unosim VALIDAN 'Title', unosim VALIDAN 'description', biram 'Important' radio
-	// button, biram jedan TAG, uploadujem 'invalid' photo format, klik na 'Save'
-	// dugme
+	// button, biram jedan TAG, uploadujem 'invalid' photo format, klik na 'Save' dugme
 	@Test
 	public void tc59() {
-		// Kreiram objekat 'Post List' web lokacije
-		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
-		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
+		
+		PostListWebPage postListWebPage=new PostListWebPage(driver);
+		assertTrue("Nisam na 'Post List' web lokaciji!",postListWebPage.checkPostListWebLocation());
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
-		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
-		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
+		AddNewPostWebPage addNewPostWebPage=new AddNewPostWebPage(driver);
+		assertTrue("Nisam na 'Add New Post' web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
@@ -3080,44 +1926,26 @@ public class AddNewPostTest {
 		// Uploadujem AVIF photo file
 		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
-		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
+		Utils.scrollTo(driver,By.xpath(Utils.saveButton));
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji!
-		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
+		assertTrue("Nisam na 'Add New Post web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("Photo error poruka - greska!",addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Content error poruka - greska!",addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
+	// Biram jednu'Category' sa padajuce liste,
 	// unosim validan 'Title', unosim validan 'description', obelezavam 'Important'
-	// radio button, biram dva TAG-a, uploadujem 'invalid' photo format, klik na
-	// 'Save' dugme
+	// radio button, biram dva TAG-a, uploadujem 'invalid' photo format, klik na 'Save' dugme
 	@Test
 	public void tc60() {
-		// Kreiram objekat 'Post List' web lokacije
-		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
-		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
+		
+		PostListWebPage postListWebPage=new PostListWebPage(driver);
+		assertTrue("Nisam na 'Post List' web lokaciji!",postListWebPage.checkPostListWebLocation());
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
-		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
-		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
+		AddNewPostWebPage addNewPostWebPage=new AddNewPostWebPage(driver);
+		assertTrue("Nisam na 'Add New Post' web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
@@ -3130,50 +1958,30 @@ public class AddNewPostTest {
 		addNewPostWebPage.checkIMPORTANTRadioButton();
 
 		// Biram dva 'TAG-a'
-		addNewPostWebPage.pickTAG(Utils.tagOne);
-		addNewPostWebPage.pickTAG(Utils.tagTwo);
+		addNewPostWebPage.pickTAG(Utils.tagOne);addNewPostWebPage.pickTAG(Utils.tagTwo);
 
 		// Uploadujem AVIF photo file
 		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
-		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
+		Utils.scrollTo(driver,By.xpath(Utils.saveButton));
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji!
-		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
+		assertTrue("Nisam na 'Add New Post web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("Photo error poruka - greska!",addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));assertTrue("Content error poruka - greska!",addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
-	// Klik na 'Add New Post' dugme, biram jednu 'Category' sa padajuce liste,
-	// unosim validan 'Title', unosim validan 'description',
+	// biram jednu'Category' sa padajuce liste, unosim validan 'Title', unosim validan 'description',
 	// obelezavam 'Important' radio button, biram jedan 'TAG', uploadujem 'invalid'
 	// photo format, unosim 'Content', klik na 'Save' dugme
 	@Test
 	public void tc61() {
-		// Kreiram objekat 'Post List' web lokacije
-		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
-		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
+		
+		PostListWebPage postListWebPage=new PostListWebPage(driver);
+		assertTrue("Nisam na 'Post List' web lokaciji!",postListWebPage.checkPostListWebLocation());
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
-		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
-		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
+		AddNewPostWebPage addNewPostWebPage=new AddNewPostWebPage(driver);
+		assertTrue("Nisam na 'Add New Post' web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
@@ -3191,49 +1999,30 @@ public class AddNewPostTest {
 		// Uploadujem AVIF photo file
 		addNewPostWebPage.uploadPhoto(Utils.photoAVIF);
 
-		// Skrolujem do 'Content' polja
-		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
+		Utils.scrollTo(driver,By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content'
-		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_100_WORDS);
+		addNewPostWebPage.inputContent(Utils.iFrameLocator,Utils.contentFieldLocator,Utils.CONTENT_100_WORDS);
 
-		// Skroluje do 'Save' dugmeta
-		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
+		Utils.scrollTo(driver,By.xpath(Utils.saveButton));
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji!
-		assertTrue("Nisam na 'Add New Post web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
+		assertTrue("Nisam na 'Add New Post web lokaciji!",addNewPostWebPage.checkAddPostWebLocation());
 
 		// Error poruke
-		assertTrue("Photo error poruka - greska!",
-				addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
+		assertTrue("Photo error poruka - greska!",addNewPostWebPage.invalidPhotoFormatError(Utils.invalidPhotoFormatErrorMessage));
 	}
 
-	// Klik na 'Add new post' dugme, biram jednu 'Category' sa padajuce liste,
-	// upisujem VALIDAN 'Title' veci od 20 karaktera, upisujem VALIDAN 'Description'
-	// veci od 50 karaktera, check 'important' radio button, check dva TAG-a,
-	// ubacujem JPG fotografiju veceg formata,
+	// Biram jednu'Category' sa padajuce liste, upisujem VALIDAN 'Title' veci od 20 karaktera, upisujem VALIDAN 'Description'
+	// veci od 50 karaktera, check 'important' radio button, check dva TAG-a, ubacujem JPG fotografiju veceg formata,
 	// unosim VALIDAN 'Content' od 100 reci, klik na 'Save' dugme
 	@Test
 	public void tc62() {
-		// Kreiram objekat 'Post List' web lokacije
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
@@ -3252,19 +2041,13 @@ public class AddNewPostTest {
 		// Uploadujem validnu JPG fotografiju
 		addNewPostWebPage.uploadPhoto(Utils.jpgBig);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content'
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, Utils.CONTENT_1000_WORDS);
 
-		// Skroluje do 'Save' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam se vratio na 'Post List' web lokaciju
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 		// Unosim u 'Search Post' polje, 'Title' posta
@@ -3277,22 +2060,12 @@ public class AddNewPostTest {
 	// Unosim u 'Content' uzastopne prazne Stringove
 	@Test
 	public void tc63() {
-		// Kreiram objekat 'Post List' web lokacije
+		
 		PostListWebPage postListWebPage = new PostListWebPage(driver);
-
-		// Proveravam da li sam na 'Post List' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
-
-		// Klik na 'Add New Post' dugme
 		postListWebPage.clickOnAddNewPostButton();
-
-		// Kreiram objekat 'Add New Post' web lokacije
 		AddNewPostWebPage addNewPostWebPage = new AddNewPostWebPage(driver);
-
-		// Proveravam da li sam na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Add New Post' web lokaciji!", addNewPostWebPage.checkAddPostWebLocation());
-
-		// Biram jednu 'Category' sa padajuce liste
 		addNewPostWebPage.pickCategory(Utils.categoryName);
 
 		// Unosim validan 'Title'
@@ -3310,24 +2083,17 @@ public class AddNewPostTest {
 		// Uploadujem validnu JPG fotografiju
 		addNewPostWebPage.uploadPhoto(Utils.jpgBig);
 
-		// Skrolujem do 'Content' polja
 		Utils.scrollTo(driver, By.xpath(Utils.contentLabel));
 
 		// Unosim 'Content'
 		addNewPostWebPage.inputContent(Utils.iFrameLocator, Utils.contentFieldLocator, "      ");
 
-		// Skroluje do 'Save' dugmeta
 		Utils.scrollTo(driver, By.xpath(Utils.saveButton));
-
-		// Klik na 'Save' dugme
 		addNewPostWebPage.clickOnSave();
-
-		// Proveram da li sam ostao na 'Add New Post' web lokaciji
 		assertTrue("Nisam na 'Post List' web lokaciji!", postListWebPage.checkPostListWebLocation());
 
 		// Error poruke
-		assertTrue("Content error poruka - greska!",
-				addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
+		assertTrue("Content error poruka - greska!", addNewPostWebPage.emptyContentError(Utils.emptyContentErrorMessage));
 	}
 
 }

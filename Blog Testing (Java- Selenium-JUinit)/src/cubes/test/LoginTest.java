@@ -22,16 +22,6 @@ import cubes.loginPage.LoginPage;
 
 public class LoginTest {
 	
-	// Ako vidimo u Testu WebElement, treba da nam se upali zuta lampica i da kazemo, hmm, ovo mozda i nije bas najbolje napisano.
-	// Trebalo bi da se mozda kreira nova klasa u kojoj bi bili WebElementi koje bismo zatim pozivali u Testu.
-	
-	// Folderi u selenumu treba da budu grupisani u dve velike celine. Jedan package su Pages a druga Testovi.
-	
-	// pitanja za cmareta:
-	// daj primer sta moze da ide u @Before i @After?
-	// kako ubacujemo neki random string koji se sam generise?
-	// Mozda nam treba neka ABSTRACT klasa koja ce sadrzati sva zajednicka polja i metode!
-	// //strong[text()='']; - ovo : "text()=''", ne sadrzi '@' kao prefix, jer je to FUNKCIJA
 	
 	// fields
 	private static WebDriver driver; 

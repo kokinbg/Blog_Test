@@ -9,11 +9,13 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>4.8.3</version>
+			<version>4.10.0</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>Selenium_Domaci</groupId>
 			<artifactId>Selenium_Domaci</artifactId>
